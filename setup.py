@@ -23,7 +23,7 @@ setup(
     author="Ivan Vyalov",
     author_email="me@bnff.website",
     url="https://github.com/GitBib/pyasstosrt",
-    download_url='https://github.com/GitBib/pyasstosrt/archive/v{}.zip'.format(
+    download_url='https://github.com/GitBib/pyasstosrt/archive/{}.zip'.format(
         version
     ),
     license="Apache License, Version 2.0, see LICENSE file",
