@@ -1,8 +1,7 @@
 import os
-import pathlib
 from pathlib import Path
 import re
-from typing import AnyStr, Dict, Optional, Generator, List
+from typing import AnyStr, Dict, List
 
 
 class Substation(object):
@@ -17,7 +16,7 @@ class Substation(object):
         self.dialogues: Dict = dict()
 
     def get_text(self) -> AnyStr:
-        return pathlib.Path(self.filepath).read_text(encoding="utf8")
+        return Path(self.filepath).read_text(encoding="utf8")
 
     def convert(self):
         cleaning_old_format = re.compile(r"\{\\[\w\S]+\)\}|\{\\\w*\d*\}")
