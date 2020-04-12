@@ -38,7 +38,7 @@ class Substation(object):
         line_text = text.split(r'\N')
         return '\n'.join([item.strip() for item in line_text])
 
-    def subtitle_formatting(self, dialogs: Optional[List, Generator]):
+    def subtitle_formatting(self, dialogs: List):
         """
         :param dialogs: Prepared dialogues
         :return: Prepared dialogue sheet
