@@ -1,0 +1,393 @@
+[Script Info]
+Title: HorribleSubs
+ScriptType: v4.00+
+Collisions: Normal
+PlayDepth: 0
+WrapStyle: 0
+PlayResX: 848
+PlayResY: 480
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Open Sans Semibold,36,&H00FFFFFF,&H000000FF,&H00020713,&H00000000,-1,0,0,0,100,100,0,0,1,2.0,0,2,0,0,28,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:10.58,0:00:13.04,Default,,0,0,0,,It's time for the main event!
+Dialogue: 0,0:00:13.04,0:00:18.25,Default,,0,0,0,,Animal Mask vs. Macadamian Ogre, AKA, MAO!
+Dialogue: 0,0:00:18.25,0:00:20.12,Default,,0,0,0,,The masked wrestler, Animal Mask,
+Dialogue: 0,0:00:20.12,0:00:24.00,Default,,0,0,0,,will face off against former Judo fighter MAO!
+Dialogue: 0,0:00:24.00,0:00:26.95,Default,,0,0,0,,Will this bring an end to their long rivalry?
+Dialogue: 0,0:00:26.95,0:00:30.04,Default,,0,0,0,,What kind of match do they\Nhave in store for us tonight?
+Dialogue: 0,0:00:33.08,0:00:35.58,Default,,0,0,0,,It's finally time...
+Dialogue: 0,0:00:36.83,0:00:40.50,Default,,0,0,0,,Being a pro wrestler was\Nthe first chapter in my life.
+Dialogue: 0,0:00:40.50,0:00:44.58,Default,,0,0,0,,And if I can win tonight's\Nworld championship title match,
+Dialogue: 0,0:00:44.58,0:00:47.29,Default,,0,0,0,,the second chapter in my life will begin...
+Dialogue: 0,0:00:49.04,0:00:51.25,Default,,0,0,0,,It's almost time for the fight!
+Dialogue: 0,0:00:51.25,0:00:53.37,Default,,0,0,0,,The world championship title bout!
+Dialogue: 0,0:00:53.37,0:00:56.70,Default,,0,0,0,,Big Saigo, I'm monologuing.\NDon't interrupt me.
+Dialogue: 0,0:00:56.70,0:00:58.50,Default,,0,0,0,,Oh, I see!
+Dialogue: 0,0:00:58.50,0:01:00.45,Default,,0,0,0,,So, what will you do if you win tonight?
+Dialogue: 0,0:01:00.45,0:01:02.62,Default,,0,0,0,,There's mountains left for you to climb!
+Dialogue: 0,0:01:02.62,0:01:04.91,Default,,0,0,0,,Yes, that's exactly right.
+Dialogue: 0,0:01:04.91,0:01:09.29,Default,,0,0,0,,When I win tonight's match,\Nthe second chapter in my life will begin.
+Dialogue: 0,0:01:09.29,0:01:11.08,Default,,0,0,0,,Oh, what is it?
+Dialogue: 0,0:01:11.08,0:01:12.79,Default,,0,0,0,,You're quitting pro wrestling to do MMA?
+Dialogue: 0,0:01:12.79,0:01:15.41,Default,,0,0,0,,No, maybe Muay Thai or Capoeira?
+Dialogue: 0,0:01:15.41,0:01:18.33,Default,,0,0,0,,Very well. I'll tell you... I'm going to...
+Dialogue: 0,0:01:18.33,0:01:20.20,Default,,0,0,0,,Whoops, looks like we're out of time.
+Dialogue: 0,0:01:20.20,0:01:22.00,Default,,0,0,0,,Break a leg and all that.
+Dialogue: 0,0:01:22.00,0:01:26.45,Default,,0,0,0,,Go out there and smash up\Nthat Macadamian Ogre guy.
+Dialogue: 0,0:01:26.45,0:01:27.87,Default,,0,0,0,,Big Saigo.
+Dialogue: 0,0:01:27.87,0:01:30.04,Default,,0,0,0,,He's always in a hurry.
+Dialogue: 0,0:01:30.54,0:01:36.54,Default,,0,0,0,,"No Pets!!"\NThe second chapter in my life that will begin\Nwhen I win tonight's title match...
+Dialogue: 0,0:01:36.54,0:01:40.29,Default,,0,0,0,,Is when I will live my life\Nsurrounded by the animals I love,
+Dialogue: 0,0:01:40.29,0:01:43.20,Default,,0,0,0,,and share the joy of living with animals\Nwith people everywhere!
+Dialogue: 0,0:01:45.66,0:01:48.66,Default,,0,0,0,,"Interdimensional Title Match\NAnimal Mask vs MAO"\NLet's go, Hiroyuki.
+Dialogue: 0,0:01:51.29,0:01:56.20,Default,,0,0,0,,The Macadamian Ogre!
+Dialogue: 0,0:01:56.20,0:01:59.33,Default,,0,0,0,,And now, entering the ring...
+Dialogue: 0,0:01:59.33,0:02:01.58,Default,,0,0,0,,The man who loves animals a little too much!
+Dialogue: 0,0:02:01.58,0:02:09.12,Default,,0,0,0,,Weighing in at 198 pounds, it's Animal Mask!
+Dialogue: 0,0:02:12.29,0:02:13.95,Default,,0,0,0,,It's finally time...
+Dialogue: 0,0:02:13.95,0:02:18.62,Default,,0,0,0,,My rival, MAO.\NA worthy opponent for my last match!
+Dialogue: 0,0:02:18.62,0:02:23.87,Default,,0,0,0,,The second chapter of my life will begin\Nafter I slam you into the mat...
+Dialogue: 0,0:02:25.16,0:02:26.54,Default,,0,0,0,,...and that is!
+Dialogue: 0,0:02:27.95,0:02:30.91,Default,,0,0,0,,Opening a pet shop!
+Dialogue: 0,0:02:46.41,0:02:49.54,Default,,0,0,0,,Strongest warrior from another world...
+Dialogue: 0,0:02:49.54,0:02:52.33,Default,,0,0,0,,You're as strong as ever, Mao!
+Dialogue: 0,0:02:52.33,0:02:53.54,Default,,0,0,0,,Impressive!
+Dialogue: 0,0:02:53.54,0:02:54.66,Default,,0,0,0,,However!
+Dialogue: 0,0:02:55.37,0:02:58.83,Default,,0,0,0,,I pray you answer my call!
+Dialogue: 0,0:02:58.83,0:03:03.37,Default,,0,0,0,,Animal Mask has climbed up onto the ropes!
+Dialogue: 0,0:03:03.37,0:03:05.83,Default,,0,0,0,,And now he's jumped!
+Dialogue: 0,0:03:05.83,0:03:07.58,Default,,0,0,0,,So has Hiroyuki!
+Dialogue: 0,0:03:07.58,0:03:10.25,Default,,0,0,0,,Wait! They've started to glow!
+Dialogue: 0,0:03:10.25,0:03:12.41,Default,,0,0,0,,What is this?
+Dialogue: 0,0:03:12.41,0:03:14.29,Default,,0,0,0,,They disappeared!
+Dialogue: 0,0:03:14.29,0:03:16.29,Default,,0,0,0,,What is this?
+Dialogue: 0,0:03:16.29,0:03:20.75,Default,,0,0,0,,Animal Mask has disappeared!
+Dialogue: 0,0:03:20.75,0:03:23.20,Default,,0,0,0,,Huh? What?
+Dialogue: 0,0:03:38.87,0:03:40.87,Default,,0,0,0,,Are you the hero?
+Dialogue: 0,0:03:42.08,0:03:43.58,Default,,0,0,0,,I am Animal Mask!
+Dialogue: 0,0:03:43.58,0:03:45.54,Default,,0,0,0,,Did the hero-summoning ritual fail?
+Dialogue: 0,0:03:45.54,0:03:46.75,Default,,0,0,0,,Why is he in his underwear?
+Dialogue: 0,0:03:46.75,0:03:49.04,Default,,0,0,0,,Is he a pervert?
+Dialogue: 0,0:03:49.04,0:03:52.41,Default,,0,0,0,,I don't care who you are!
+Dialogue: 0,0:03:52.41,0:03:57.87,Default,,0,0,0,,If you've answered our call,\Nthen you are our hero!
+Dialogue: 0,0:03:57.87,0:03:59.58,Default,,0,0,0,,What's going on?
+Dialogue: 0,0:03:59.58,0:04:02.04,Default,,0,0,0,,Another trick of Big Saigo's?
+Dialogue: 0,0:04:02.04,0:04:05.95,Default,,0,0,0,,No... this isn't the arena.
+Dialogue: 0,0:04:05.95,0:04:08.54,Default,,0,0,0,,So where am I?
+Dialogue: 0,0:04:08.54,0:04:14.25,Default,,0,0,0,,Please, Hero, will you defeat\Nthe evil demon beasts that stalk this land
+Dialogue: 0,0:04:14.25,0:04:17.83,Default,,0,0,0,,as well as the Demon King?
+Dialogue: 0,0:04:17.83,0:04:19.70,Default,,0,0,0,,Evil demon beasts?
+Dialogue: 0,0:04:19.70,0:04:23.45,Default,,0,0,0,,Yes, terrifying animals called monsters...
+Dialogue: 0,0:04:23.45,0:04:26.00,Default,,0,0,0,,Exterminate every one of them\Nfrom this land...
+Dialogue: 0,0:04:26.95,0:04:28.45,Default,,0,0,0,,Hero?
+Dialogue: 0,0:04:28.45,0:04:32.12,Default,,0,0,0,,It appears I heard you right after all.
+Dialogue: 0,0:04:33.62,0:04:37.58,Default,,0,0,0,,You're telling me to defeat animals for you?
+Dialogue: 0,0:04:37.58,0:04:41.66,Default,,0,0,0,,Yes. They're terrifying and disgusting beasts...
+Dialogue: 0,0:04:42.58,0:04:44.54,Default,,0,0,0,,Um, Hero?
+Dialogue: 0,0:04:44.54,0:04:47.70,Default,,0,0,0,,We can do that after you\Ndefeat the Demon King...
+Dialogue: 0,0:04:47.70,0:04:51.58,Default,,0,0,0,,Or at least when nobody's watching...
+Dialogue: 0,0:04:51.58,0:04:55.91,Default,,0,0,0,,Hero... Um, Hero?
+Dialogue: 0,0:04:59.54,0:05:01.87,Default,,0,0,0,,{\i1}Hero{\i0}?!
+Dialogue: 0,0:05:12.45,0:05:15.50,Default,,0,0,0,,Winner!
+Dialogue: 0,0:06:46.75,0:06:49.91,Default,,0,0,0,,{\an8}"Wrestler x Summoning"
+Dialogue: 0,0:06:50.91,0:06:53.37,Default,,0,0,0,,The princess's noble butt\Nis being shown to the world!
+Dialogue: 0,0:06:53.37,0:06:55.91,Default,,0,0,0,,Somebody, hide her butt!
+Dialogue: 0,0:06:55.91,0:06:57.95,Default,,0,0,0,,Defeat animals?
+Dialogue: 0,0:06:57.95,0:07:00.00,Default,,0,0,0,,So the blood of an animal lover\Nthat flows through my veins
+Dialogue: 0,0:07:00.00,0:07:03.75,Default,,0,0,0,,forced me to give that impudent\Ngirl a German suplex?
+Dialogue: 0,0:07:03.75,0:07:05.25,Default,,0,0,0,,You bastard...
+Dialogue: 0,0:07:05.25,0:07:09.83,Default,,0,0,0,,Hero, I understand that you're angry\Nabout being summoned like this,
+Dialogue: 0,0:07:09.83,0:07:12.83,Default,,0,0,0,,but you can't do that to the princess.
+Dialogue: 0,0:07:12.83,0:07:17.16,Default,,0,0,0,,I don't know what you're talking about\Nwith this summoning and hero nonsense!
+Dialogue: 0,0:07:17.79,0:07:21.33,Default,,0,0,0,,But... perhaps I went too far.
+Dialogue: 0,0:07:21.33,0:07:22.83,Default,,0,0,0,,I know!
+Dialogue: 0,0:07:26.33,0:07:27.75,Default,,0,0,0,,Drape.
+Dialogue: 0,0:07:34.50,0:07:36.79,Default,,0,0,0,,Stop messing around!
+Dialogue: 0,0:07:36.79,0:07:39.41,Default,,0,0,0,,Capture him!
+Dialogue: 0,0:07:39.41,0:07:40.25,Default,,0,0,0,,Damn!
+Dialogue: 0,0:07:40.25,0:07:42.12,Default,,0,0,0,,I was trying to be a gentleman\Nand help the lady out,
+Dialogue: 0,0:07:42.12,0:07:43.20,Default,,0,0,0,,why are they mad?
+Dialogue: 0,0:07:43.20,0:07:46.70,Default,,0,0,0,,What kind of lunatic waves\Na sword at someone like that?
+Dialogue: 0,0:07:55.25,0:07:57.12,Default,,0,0,0,,This definitely isn't the arena.
+Dialogue: 0,0:07:57.12,0:07:59.29,Default,,0,0,0,,It's not even night anymore.
+Dialogue: 0,0:07:59.29,0:08:02.08,Default,,0,0,0,,Where am I?
+Dialogue: 0,0:08:02.08,0:08:03.08,Default,,0,0,0,,Who is that?
+Dialogue: 0,0:08:03.08,0:08:04.16,Default,,0,0,0,,Where are his pants?
+Dialogue: 0,0:08:04.16,0:08:05.66,Default,,0,0,0,,Is he a pervert?
+Dialogue: 0,0:08:05.66,0:08:07.91,Default,,0,0,0,,We should stay away...
+Dialogue: 0,0:08:07.91,0:08:08.79,Default,,0,0,0,,He looked over here.
+Dialogue: 0,0:08:08.79,0:08:10.20,Default,,0,0,0,,Don't meet his gaze.
+Dialogue: 0,0:08:10.20,0:08:13.33,Default,,0,0,0,,Somebody go call a hunter!
+Dialogue: 0,0:08:13.33,0:08:16.75,Default,,0,0,0,,I guess I'll just find someone\Nkind-looking to ask.
+Dialogue: 0,0:08:16.75,0:08:19.79,Default,,0,0,0,,Um, excuse me... Can you tell me where I am?
+Dialogue: 0,0:08:22.75,0:08:24.12,Default,,0,0,0,,I get it!
+Dialogue: 0,0:08:24.12,0:08:28.66,Default,,0,0,0,,It's rude to ask people questions\Nwhile wearing a mask!
+Dialogue: 0,0:08:34.91,0:08:38.62,Default,,0,0,0,,The moment I take off my mask,\NI'm no longer Animal Mask--
+Dialogue: 0,0:08:38.62,0:08:41.37,Default,,0,0,0,,I'm an ordinary man named Genzo Shibata.
+Dialogue: 0,0:08:41.37,0:08:42.25,Default,,0,0,0,,Now no one will know...
+Dialogue: 0,0:08:42.25,0:08:44.20,Default,,0,0,0,,Over there! That's him!
+Dialogue: 0,0:08:44.20,0:08:44.58,Default,,0,0,0,,--Watch out! It's a pervert!
+Dialogue: 0,0:08:44.58,0:08:47.08,Default,,0,0,0,,--What?\N--Watch out! It's a pervert!
+Dialogue: 0,0:08:47.08,0:08:48.50,Default,,0,0,0,,Impossible!
+Dialogue: 0,0:08:49.16,0:08:50.50,Default,,0,0,0,,The pervert ran away!
+Dialogue: 0,0:08:50.50,0:08:51.75,Default,,0,0,0,,After the pervert!
+Dialogue: 0,0:08:51.75,0:08:54.45,Default,,0,0,0,,I'm not a pervert! I'm a pro wrestler!
+Dialogue: 0,0:08:58.62,0:09:02.04,Default,,0,0,0,,I have no idea how they figured me out.
+Dialogue: 0,0:09:02.04,0:09:04.58,Default,,0,0,0,,But don't worry, Hiroyuki.
+Dialogue: 0,0:09:04.58,0:09:07.75,Default,,0,0,0,,I'll figure out a way out of this.
+Dialogue: 0,0:09:10.41,0:09:12.12,Default,,0,0,0,,Sorry, Hiroyuki.
+Dialogue: 0,0:09:12.12,0:09:14.70,Default,,0,0,0,,Forgive me for being useless...
+Dialogue: 0,0:09:16.66,0:09:20.45,Default,,0,0,0,,Hiroyuki! I'm so glad you're here with me!
+Dialogue: 0,0:09:20.45,0:09:23.29,Default,,0,0,0,,I don't know what I would've done\Nif I were here by myself.
+Dialogue: 0,0:09:23.29,0:09:25.08,Default,,0,0,0,,I don't care about clothes! Not at all!
+Dialogue: 0,0:09:25.08,0:09:28.00,Default,,0,0,0,,My goal is to find food for you tonight!
+Dialogue: 0,0:09:29.08,0:09:32.50,Default,,0,0,0,,Bro, that pervert looks pretty buff.
+Dialogue: 0,0:09:32.50,0:09:34.66,Default,,0,0,0,,We could sell him for a lot.
+Dialogue: 0,0:09:34.66,0:09:41.54,Default,,0,0,0,,Yes. And that strange creature\Nwould probably be worth a lot of cash.
+Dialogue: 0,0:09:49.95,0:09:52.00,Default,,0,0,0,,You're so cute...
+Dialogue: 0,0:09:52.00,0:09:55.04,Default,,0,0,0,,You there, in your underwear.
+Dialogue: 0,0:09:55.04,0:09:56.95,Default,,0,0,0,,Wh-What?
+Dialogue: 0,0:09:56.95,0:10:00.00,Default,,0,0,0,,Animal ears?!
+Dialogue: 0,0:10:05.95,0:10:07.33,Default,,0,0,0,,A-And...
+Dialogue: 0,0:10:07.33,0:10:09.37,Default,,0,0,0,,You're hungry, right?
+Dialogue: 0,0:10:09.37,0:10:11.45,Default,,0,0,0,,Come with us and we'll give you some food.
+Dialogue: 0,0:10:11.45,0:10:13.45,Default,,0,0,0,,An animal!
+Dialogue: 0,0:10:13.45,0:10:17.58,Default,,0,0,0,,Do you like my hairy chest and tail?
+Dialogue: 0,0:10:19.91,0:10:21.70,Default,,0,0,0,,You've got nowhere to go, right?
+Dialogue: 0,0:10:21.70,0:10:24.41,Default,,0,0,0,,Do what he says...
+Dialogue: 0,0:10:30.58,0:10:33.58,Default,,0,0,0,,Bro, this guy seems like bad news...
+Dialogue: 0,0:10:33.58,0:10:35.25,Default,,0,0,0,,Y-Yeah...
+Dialogue: 0,0:10:35.25,0:10:38.20,Default,,0,0,0,,So fluffy!
+Dialogue: 0,0:10:38.20,0:10:41.33,Default,,0,0,0,,He's staring at you, not me!
+Dialogue: 0,0:10:43.33,0:10:45.37,Default,,0,0,0,,W-We'll be on our way...
+Dialogue: 0,0:10:46.66,0:10:48.45,Default,,0,0,0,,What the hell?
+Dialogue: 0,0:10:48.45,0:10:49.62,Default,,0,0,0,,Do you want to fight?
+Dialogue: 0,0:10:49.62,0:10:52.58,Default,,0,0,0,,You think you can beat a beastman\Nwith your bare hands?
+Dialogue: 0,0:10:52.58,0:10:54.58,Default,,0,0,0,,Get 'em, bro!
+Dialogue: 0,0:10:54.58,0:10:58.00,Default,,0,0,0,,I see... you're a beastman, huh?
+Dialogue: 0,0:10:59.70,0:11:01.29,Default,,0,0,0,,Bro!
+Dialogue: 0,0:11:08.45,0:11:12.12,Default,,0,0,0,,Hey, you jerk! Get off my brother!
+Dialogue: 0,0:11:12.12,0:11:14.41,Default,,0,0,0,,Stop sniffing him!
+Dialogue: 0,0:11:15.45,0:11:17.37,Default,,0,0,0,,Misha, this guy is crazy!
+Dialogue: 0,0:11:17.37,0:11:18.79,Default,,0,0,0,,He's crazy!
+Dialogue: 0,0:11:18.79,0:11:23.37,Default,,0,0,0,,We're sorry, so stop! Let him go!
+Dialogue: 0,0:11:23.37,0:11:26.50,Default,,0,0,0,,If you don't, my bro will... my bro will...
+Dialogue: 0,0:11:26.50,0:11:28.12,Default,,0,0,0,,What's this guy's deal?
+Dialogue: 0,0:11:28.12,0:11:30.54,Default,,0,0,0,,He's incredibly strong!
+Dialogue: 0,0:11:30.54,0:11:34.54,Default,,0,0,0,,Don't worry!\NYou'll start to like it any second!
+Dialogue: 0,0:11:34.54,0:11:37.16,Default,,0,0,0,,Oh, you like it when I rub you here, huh?
+Dialogue: 0,0:11:37.16,0:11:39.66,Default,,0,0,0,,Stop it!
+Dialogue: 0,0:11:39.66,0:11:43.41,Default,,0,0,0,,We'll pay you! Stop it! Please!
+Dialogue: 0,0:11:43.41,0:11:47.12,Default,,0,0,0,,See? Feels good, right? Good boy...
+Dialogue: 0,0:11:50.16,0:11:52.37,Default,,0,0,0,,Now, you're next...
+Dialogue: 0,0:11:54.08,0:11:56.79,Default,,0,0,0,,{\i1}Cat ears{\i0}!
+Dialogue: 0,0:11:59.62,0:12:02.79,Default,,0,0,0,,Shigure, give up already!
+Dialogue: 0,0:12:04.70,0:12:07.41,Default,,0,0,0,,You're about to be sold!
+Dialogue: 0,0:12:07.41,0:12:10.29,Default,,0,0,0,,No!
+Dialogue: 0,0:12:10.29,0:12:14.79,Default,,0,0,0,,I don't want to live at some noble's house\Nand get walks and naps and free snacks!
+Dialogue: 0,0:12:14.79,0:12:17.12,Default,,0,0,0,,Who said you were being sold to a noble?
+Dialogue: 0,0:12:17.12,0:12:20.12,Default,,0,0,0,,If that was the deal I'd go myself.
+Dialogue: 0,0:12:20.12,0:12:23.70,Default,,0,0,0,,But if they're willing to feed me\Nfilet mignon every day,
+Dialogue: 0,0:12:23.70,0:12:25.29,Default,,0,0,0,,I may be willing to let them sell me.
+Dialogue: 0,0:12:25.29,0:12:29.25,Default,,0,0,0,,Nobody will buy a beast girl like that!
+Dialogue: 0,0:12:29.25,0:12:30.54,Default,,0,0,0,,Let's go!
+Dialogue: 0,0:12:30.54,0:12:30.91,Default,,0,0,0,,--No!
+Dialogue: 0,0:12:30.91,0:12:32.75,Default,,0,0,0,,--A poor girl in unfortunate circumstances...\N--No!
+Dialogue: 0,0:12:32.75,0:12:34.16,Default,,0,0,0,,Stop whining and let's go!
+Dialogue: 0,0:12:34.16,0:12:37.75,Default,,0,0,0,,It's not right for an outsider\Nlike me to get involved.
+Dialogue: 0,0:12:37.75,0:12:42.37,Default,,0,0,0,,And not because I'd rather pet the cat ears...
+Dialogue: 0,0:12:42.37,0:12:44.79,Default,,0,0,0,,That tail! Those ears! Is that a wolf?
+Dialogue: 0,0:12:44.79,0:12:48.45,Default,,0,0,0,,I've had plenty of experience touching\Ncats and dogs, but never a wolf!
+Dialogue: 0,0:12:48.45,0:12:50.95,Default,,0,0,0,,A girl with cat ears is a hard thing to pass up,
+Dialogue: 0,0:12:50.95,0:12:54.29,Default,,0,0,0,,but my priority now is the wolf ears girl!
+Dialogue: 0,0:12:54.29,0:12:57.00,Default,,0,0,0,,Please...
+Dialogue: 0,0:12:57.00,0:12:59.95,Default,,0,0,0,,All praise animal ears and animal tails!
+Dialogue: 0,0:12:59.95,0:13:01.29,Default,,0,0,0,,That's far enough!
+Dialogue: 0,0:13:01.29,0:13:04.20,Default,,0,0,0,,Mind your own business.
+Dialogue: 0,0:13:04.20,0:13:05.70,Default,,0,0,0,,I don't know who you think you are,
+Dialogue: 0,0:13:05.70,0:13:07.70,Default,,0,0,0,,but try anything and you'll regret it.
+Dialogue: 0,0:13:07.70,0:13:09.04,Default,,0,0,0,,Really, who are you?
+Dialogue: 0,0:13:09.04,0:13:11.00,Default,,0,0,0,,Edgar, he's dangerous!
+Dialogue: 0,0:13:11.00,0:13:13.54,Default,,0,0,0,,He's a super-high-level pervert!
+Dialogue: 0,0:13:13.54,0:13:15.95,Default,,0,0,0,,He just had his way with my bro...
+Dialogue: 0,0:13:15.95,0:13:17.20,Default,,0,0,0,,What?
+Dialogue: 0,0:13:17.20,0:13:19.95,Default,,0,0,0,,What are you doing?
+Dialogue: 0,0:13:19.95,0:13:22.20,Default,,0,0,0,,Allow me to first correct\Nyour misunderstanding.
+Dialogue: 0,0:13:22.20,0:13:23.95,Default,,0,0,0,,I am not a pervert.
+Dialogue: 0,0:13:23.95,0:13:27.16,Default,,0,0,0,,I simply love all animals\Nregardless of gender!
+Dialogue: 0,0:13:27.16,0:13:30.25,Default,,0,0,0,,See? He's more dangerous than he looks!
+Dialogue: 0,0:13:30.25,0:13:33.12,Default,,0,0,0,,Yeah. The way he dresses,\Nthe things he says...
+Dialogue: 0,0:13:33.12,0:13:35.91,Default,,0,0,0,,He's a pervert like none\Nthe world has ever seen!
+Dialogue: 0,0:13:35.91,0:13:37.79,Default,,0,0,0,,Why do you fear?
+Dialogue: 0,0:13:37.79,0:13:43.00,Default,,0,0,0,,I don't know who you are,\Nor what reasons you may have...
+Dialogue: 0,0:13:43.00,0:13:44.70,Default,,0,0,0,,No! Stop it!
+Dialogue: 0,0:13:44.70,0:13:49.00,Default,,0,0,0,,If the wolf girl is upset, you are evil!
+Dialogue: 0,0:13:53.79,0:13:56.79,Default,,0,0,0,,Damn it!
+Dialogue: 0,0:13:56.79,0:13:59.75,Default,,0,0,0,,You pervert! We'll get you yet!
+Dialogue: 0,0:14:00.95,0:14:04.91,Default,,0,0,0,,Come to think of it, I hadn't gotten\Nto pet the cat ears yet, had I?
+Dialogue: 0,0:14:04.91,0:14:07.45,Default,,0,0,0,,Why did you have to open your mouth?!
+Dialogue: 0,0:14:07.45,0:14:10.00,Default,,0,0,0,,You're right! I'm sorry!
+Dialogue: 0,0:14:10.00,0:14:11.33,Default,,0,0,0,,Um...
+Dialogue: 0,0:14:14.54,0:14:17.58,Default,,0,0,0,,Thank you for saving me!
+Dialogue: 0,0:14:17.58,0:14:20.08,Default,,0,0,0,,Now I won't be sold.
+Dialogue: 0,0:14:20.08,0:14:22.54,Default,,0,0,0,,Don't worry. I did it because I wanted to.
+Dialogue: 0,0:14:22.54,0:14:25.25,Default,,0,0,0,,You were about to be kidnapped\Nby a slaver, right?
+Dialogue: 0,0:14:25.25,0:14:30.16,Default,,0,0,0,,No, I'd borrowed money from him, so...
+Dialogue: 0,0:14:31.70,0:14:32.66,Default,,0,0,0,,I see.
+Dialogue: 0,0:14:32.66,0:14:36.04,Default,,0,0,0,,You were charged absurd amounts of interest\Nand then sold to pay your debts.
+Dialogue: 0,0:14:36.04,0:14:39.37,Default,,0,0,0,,No, I'm the one who said\Nthat if I couldn't pay by the deadline
+Dialogue: 0,0:14:39.37,0:14:41.33,Default,,0,0,0,,he could sell me instead.
+Dialogue: 0,0:14:43.08,0:14:46.33,Default,,0,0,0,,In exchange, I told him to give me a loan\Nwith no interest and no collateral,
+Dialogue: 0,0:14:46.33,0:14:51.00,Default,,0,0,0,,and then cried and sobbed\Nin front of his shop until he gave in.
+Dialogue: 0,0:14:51.00,0:14:53.83,Default,,0,0,0,,I intended to use that money\Nto start a business and get rich,
+Dialogue: 0,0:14:53.83,0:14:56.45,Default,,0,0,0,,but it didn't work out.
+Dialogue: 0,0:14:56.45,0:14:59.12,Default,,0,0,0,,She's a loser.
+Dialogue: 0,0:15:00.00,0:15:01.58,Default,,0,0,0,,What's that look?
+Dialogue: 0,0:15:01.58,0:15:03.70,Default,,0,0,0,,I was making money for a while!
+Dialogue: 0,0:15:03.70,0:15:08.20,Default,,0,0,0,,But then humans started copying me.
+Dialogue: 0,0:15:10.41,0:15:12.25,Default,,0,0,0,,I am Genzo Shibata.
+Dialogue: 0,0:15:12.25,0:15:13.70,Default,,0,0,0,,A pro wrestler.
+Dialogue: 0,0:15:13.70,0:15:16.08,Default,,0,0,0,,My name is Shigure.
+Dialogue: 0,0:15:16.08,0:15:21.45,Default,,0,0,0,,And this is Hiroyuki. My partner\Nand a mongrel of pure breeding.
+Dialogue: 0,0:15:22.75,0:15:25.79,Default,,0,0,0,,Nice to meet you, too!
+Dialogue: 0,0:15:25.79,0:15:30.29,Default,,0,0,0,,Um, I'd love to thank you\Nfor saving me, but...
+Dialogue: 0,0:15:30.29,0:15:32.29,Default,,0,0,0,,I'm broke.
+Dialogue: 0,0:15:32.29,0:15:36.16,Default,,0,0,0,,But from what you said, it sounds\Nless like I've done a good deed
+Dialogue: 0,0:15:36.16,0:15:38.75,Default,,0,0,0,,and more like I've committed a felony...
+Dialogue: 0,0:15:38.75,0:15:40.16,Default,,0,0,0,,Don't worry!
+Dialogue: 0,0:15:40.16,0:15:43.58,Default,,0,0,0,,Remember what I said about\Npeople stealing my business model?
+Dialogue: 0,0:15:43.58,0:15:47.00,Default,,0,0,0,,The guy who stole it was Edgar,\Nthe guy you just saw!
+Dialogue: 0,0:15:47.00,0:15:50.70,Default,,0,0,0,,See? That makes him evil, right? Right? Right?
+Dialogue: 0,0:15:50.70,0:15:56.75,Default,,0,0,0,,Well, I guess I could count that\Nas a good deed, just barely.
+Dialogue: 0,0:15:56.75,0:15:58.50,Default,,0,0,0,,So...
+Dialogue: 0,0:15:58.50,0:16:00.91,Default,,0,0,0,,You said you were broke, right?
+Dialogue: 0,0:16:04.04,0:16:06.29,Default,,0,0,0,,You can pay with your body instead.
+Dialogue: 0,0:16:06.29,0:16:08.45,Default,,0,0,0,,He's a loser.
+Dialogue: 0,0:16:19.04,0:16:20.91,Default,,0,0,0,,I'll get him...
+Dialogue: 0,0:16:22.33,0:16:24.45,Default,,0,0,0,,It's a shame, huh?
+Dialogue: 0,0:16:25.58,0:16:26.79,Default,,0,0,0,,You okay?
+Dialogue: 0,0:16:26.79,0:16:29.25,Default,,0,0,0,,Damn that bastard.
+Dialogue: 0,0:16:29.25,0:16:31.41,Default,,0,0,0,,I won't just give up...
+Dialogue: 0,0:16:31.41,0:16:33.87,Default,,0,0,0,,I don't think there's anything you can do.
+Dialogue: 0,0:16:33.87,0:16:36.04,Default,,0,0,0,,Got a plan?
+Dialogue: 0,0:16:36.04,0:16:40.33,Default,,0,0,0,,Yeah. That strange creature he had.
+Dialogue: 0,0:16:40.33,0:16:42.08,Default,,0,0,0,,Oh, that?
+Dialogue: 0,0:16:42.08,0:16:43.04,Default,,0,0,0,,What will you do with it?
+Dialogue: 0,0:16:43.04,0:16:45.66,Default,,0,0,0,,What else? I'll steal it!
+Dialogue: 0,0:16:45.66,0:16:48.08,Default,,0,0,0,,Great idea! Let's do it!
+Dialogue: 0,0:16:48.08,0:16:50.12,Default,,0,0,0,,We're gonna do it!
+Dialogue: 0,0:16:50.12,0:16:50.95,Default,,0,0,0,,Yeah!
+Dialogue: 0,0:16:50.95,0:16:52.83,Default,,0,0,0,,--We'll show that pervert who's boss!
+Dialogue: 0,0:16:52.83,0:16:55.29,Default,,0,0,0,,--I have nothing but a bad feeling...\N--We'll show that pervert who's boss!
+Dialogue: 0,0:16:57.50,0:16:58.54,Default,,0,0,0,,So this is it?
+Dialogue: 0,0:16:58.54,0:17:00.50,Default,,0,0,0,,Yes. The Hunter Guild.
+Dialogue: 0,0:17:00.50,0:17:03.95,Default,,0,0,0,,Let's work here for a while\Nto make some money.
+Dialogue: 0,0:17:03.95,0:17:06.29,Default,,0,0,0,,You seem to be really strong,
+Dialogue: 0,0:17:06.29,0:17:11.16,Default,,0,0,0,,so there's probably lots of great jobs for you.
+Dialogue: 0,0:17:11.16,0:17:12.12,Default,,0,0,0,,So you see,
+Dialogue: 0,0:17:12.12,0:17:16.00,Default,,0,0,0,,I have complete confidence\Nin my ability to love any animal
+Dialogue: 0,0:17:16.00,0:17:20.16,Default,,0,0,0,,regardless of gender, species,\Nor even more specifically
+Dialogue: 0,0:17:20.16,0:17:25.29,Default,,0,0,0,,hairiness, long-hair, short-hair,\Neye color, or tail length!
+Dialogue: 0,0:17:28.12,0:17:31.20,Default,,0,0,0,,So I'd like to maintain a relationship of love
+Dialogue: 0,0:17:31.20,0:17:35.08,Default,,0,0,0,,and caring with animals at all times!
+Dialogue: 0,0:17:37.08,0:17:40.70,Default,,0,0,0,,What? What is he talking about?
+Dialogue: 0,0:17:40.70,0:17:42.25,Default,,0,0,0,,And...
+Dialogue: 0,0:17:42.25,0:17:49.08,Default,,0,0,0,,Even the fiercest, most violent animal will\Nrespond to my overwhelming love for them.
+Dialogue: 0,0:17:49.08,0:17:50.04,Default,,0,0,0,,So...
+Dialogue: 0,0:17:50.04,0:17:51.12,Default,,0,0,0,,What do I?
+Dialogue: 0,0:17:51.12,0:17:53.87,Default,,0,0,0,,What am I supposed to do here?
+Dialogue: 0,0:17:55.37,0:17:56.91,Default,,0,0,0,,Trouble, Guild Master!
+Dialogue: 0,0:17:56.91,0:17:58.25,Default,,0,0,0,,What's going on?
+Dialogue: 0,0:17:58.25,0:17:59.83,Default,,0,0,0,,I'm saved!
+Dialogue: 0,0:17:59.83,0:18:02.70,Default,,0,0,0,,Our party was wiped out by a cerberus pack.
+Dialogue: 0,0:18:02.70,0:18:04.91,Default,,0,0,0,,What? Perfect.
+Dialogue: 0,0:18:04.91,0:18:06.50,Default,,0,0,0,,Will you go too?
+Dialogue: 0,0:18:06.50,0:18:08.50,Default,,0,0,0,,Cerberuses are terrifying monsters...
+Dialogue: 0,0:18:08.50,0:18:09.33,Default,,0,0,0,,What?
+Dialogue: 0,0:18:09.33,0:18:10.16,Default,,0,0,0,,Where are they?
+Dialogue: 0,0:18:10.16,0:18:13.08,Default,,0,0,0,,Genzo! Wait!
+Dialogue: 0,0:18:13.08,0:18:14.37,Default,,0,0,0,,What?
+Dialogue: 0,0:18:14.37,0:18:19.12,Default,,0,0,0,,What sort of man isn't scared of a cerberus\Nand instead runs out to meet them?
+Dialogue: 0,0:18:19.12,0:18:22.00,Default,,0,0,0,,What a brave man.
+Dialogue: 0,0:18:22.00,0:18:26.33,Default,,0,0,0,,But... I didn't understand\Na word he was saying.
+Dialogue: 0,0:18:27.75,0:18:29.08,Default,,0,0,0,,It's deep in this forest!
+Dialogue: 0,0:18:29.08,0:18:30.16,Default,,0,0,0,,Okay!
+Dialogue: 0,0:18:30.16,0:18:31.58,Default,,0,0,0,,I don't think I've seen you before.
+Dialogue: 0,0:18:31.58,0:18:33.00,Default,,0,0,0,,Are you going unarmed?
+Dialogue: 0,0:18:33.00,0:18:34.62,Default,,0,0,0,,You can borrow this if you want.
+Dialogue: 0,0:18:34.62,0:18:36.04,Default,,0,0,0,,Fool!
+Dialogue: 0,0:18:36.04,0:18:39.70,Default,,0,0,0,,Do I look like a wrestler\Nwho uses weapons to you?
+Dialogue: 0,0:18:40.95,0:18:42.62,Default,,0,0,0,,He's going to fight them unarmed?
+Dialogue: 0,0:18:42.62,0:18:45.16,Default,,0,0,0,,How confident is he?
+Dialogue: 0,0:18:45.16,0:18:48.08,Default,,0,0,0,,Um, I'll borrow it...
+Dialogue: 0,0:18:48.08,0:18:51.87,Default,,0,0,0,,Listen, we can't let them get near the town!
+Dialogue: 0,0:18:51.87,0:18:53.70,Default,,0,0,0,,Stop them here!
+Dialogue: 0,0:18:58.95,0:19:00.58,Default,,0,0,0,,This is bad!
+Dialogue: 0,0:19:00.58,0:19:02.16,Default,,0,0,0,,So these are cerberuses?
+Dialogue: 0,0:19:02.16,0:19:04.79,Default,,0,0,0,,They've got three heads!
+Dialogue: 0,0:19:07.33,0:19:10.37,Default,,0,0,0,,That means triple the fun!
+Dialogue: 0,0:19:10.37,0:19:12.41,Default,,0,0,0,,So there are animals like this in this world?
+Dialogue: 0,0:19:12.41,0:19:14.87,Default,,0,0,0,,Okay, maybe they look a little strange, but...
+Dialogue: 0,0:19:16.16,0:19:17.54,Default,,0,0,0,,Are you scared?
+Dialogue: 0,0:19:17.54,0:19:19.45,Default,,0,0,0,,Well, calm down.
+Dialogue: 0,0:19:19.45,0:19:20.79,Default,,0,0,0,,Hey!
+Dialogue: 0,0:19:20.79,0:19:24.66,Default,,0,0,0,,No, let's see how he handles this.
+Dialogue: 0,0:19:24.66,0:19:26.70,Default,,0,0,0,,Yes...
+Dialogue: 0,0:19:27.37,0:19:30.62,Default,,0,0,0,,Cerberus!
+Dialogue: 0,0:19:32.37,0:19:33.95,Default,,0,0,0,,They appear to be a type of dog.
+Dialogue: 0,0:19:33.95,0:19:36.87,Default,,0,0,0,,Which means that if I can become\Nfriends with the pack leader,
+Dialogue: 0,0:19:36.87,0:19:39.91,Default,,0,0,0,,the others will quickly open up to me as well.
+Dialogue: 0,0:19:39.91,0:19:44.16,Default,,0,0,0,,The leader is probably...\Nthe one guarding the rear!
+Dialogue: 0,0:19:44.16,0:19:45.37,Default,,0,0,0,,You?
+Dialogue: 0,0:19:45.37,0:19:47.45,Default,,0,0,0,,{\i1}Hello{\i0}!
+Dialogue: 0,0:19:47.45,0:19:48.37,Default,,0,0,0,,He ran in!
+Dialogue: 0,0:19:48.37,0:19:50.87,Default,,0,0,0,,Gotcha!
+Dialogue: 0,0:19:50.87,0:19:52.50,Default,,0,0,0,,He dodged them!
+Dialogue: 0,0:19:54.79,0:19:58.08,Default,,0,0,0,,Good boy! Let's play!
+Dialogue: 0,0:20:01.08,0:20:02.95,Default,,0,0,0,,And now for the leader!
+Dialogue: 0,0:20:05.83,0:20:07.79,Default,,0,0,0,,Come here!
+Dialogue: 0,0:20:14.45,0:20:15.95,Default,,0,0,0,,He pinned it!
+Dialogue: 0,0:20:15.95,0:20:17.41,Default,,0,0,0,,What kind of move is that?
+Dialogue: 0,0:20:19.04,0:20:20.41,Default,,0,0,0,,But there are others...
+Dialogue: 0,0:20:20.41,0:20:21.33,Default,,0,0,0,,This is bad!
+Dialogue: 0,0:20:21.33,0:20:22.58,Default,,0,0,0,,Should we help?
+Dialogue: 0,0:20:22.58,0:20:24.83,Default,,0,0,0,,Stay out of this!
+Dialogue: 0,0:20:25.58,0:20:28.16,Default,,0,0,0,,He's keeping us out of danger?
+Dialogue: 0,0:20:28.16,0:20:30.25,Default,,0,0,0,,What a man!
+Dialogue: 0,0:20:31.12,0:20:34.50,Default,,0,0,0,,I think I'm starting to figure him out...
+Dialogue: 0,0:20:34.50,0:20:37.54,Default,,0,0,0,,Good boy! Good boy!
+Dialogue: 0,0:20:37.54,0:20:40.58,Default,,0,0,0,,You like it here, huh?
+Dialogue: 0,0:20:47.58,0:20:50.66,Default,,0,0,0,,Good boy... You're such a good boy...
+Dialogue: 0,0:20:50.66,0:20:54.16,Default,,0,0,0,,He really pinned it with his bare hands...
+Dialogue: 0,0:20:54.16,0:20:56.16,Default,,0,0,0,,Like you'd pin down a lady...
+Dialogue: 0,0:20:56.16,0:20:57.83,Default,,0,0,0,,He's like a lady killer...
+Dialogue: 0,0:20:57.83,0:21:00.12,Default,,0,0,0,,No, he's...
+Dialogue: 0,0:21:00.12,0:21:02.00,Default,,0,0,0,,...a demon beast killer!
+Dialogue: 0,0:21:09.58,0:21:11.66,Default,,0,0,0,,We got enough money from the job\Nto get you some clothes,
+Dialogue: 0,0:21:11.66,0:21:13.95,Default,,0,0,0,,as well as pay for an inn for a while.
+Dialogue: 0,0:21:13.95,0:21:15.41,Default,,0,0,0,,Yeah.
+Dialogue: 0,0:21:15.41,0:21:18.25,Default,,0,0,0,,So, what will you do now?
+Dialogue: 0,0:21:18.25,0:21:20.75,Default,,0,0,0,,I've made my decision.
+Dialogue: 0,0:21:20.75,0:21:24.04,Default,,0,0,0,,I want people to understand\Nhow wonderful demon beasts are!
+Dialogue: 0,0:21:24.04,0:21:26.79,Default,,0,0,0,,Indeed! I'll bring about a world\Nwhere demon beasts and humans
+Dialogue: 0,0:21:26.79,0:21:28.25,Default,,0,0,0,,can understand each other!
+Dialogue: 0,0:21:28.25,0:21:30.91,Default,,0,0,0,,That's impossible in this country.
+Dialogue: 0,0:21:30.91,0:21:31.83,Default,,0,0,0,,No...
+Dialogue: 0,0:21:33.45,0:21:35.95,Default,,0,0,0,,I believe I can do it.
+Dialogue: 0,0:21:35.95,0:21:38.12,Default,,0,0,0,,So you must believe too.
+Dialogue: 0,0:21:40.25,0:21:44.87,Default,,0,0,0,,Genzo, is the reason\Nyou refused to be a hero...?
+Dialogue: 0,0:21:44.87,0:21:49.87,Default,,0,0,0,,That princess demanded I defeat animals!
+Dialogue: 0,0:21:49.87,0:21:53.33,Default,,0,0,0,,Animals and human,\Nbeast people and humans...
+Dialogue: 0,0:21:53.33,0:21:56.62,Default,,0,0,0,,I like it! Let me help, too!
+Dialogue: 0,0:21:56.62,0:21:59.25,Default,,0,0,0,,Really? Then let's do this!
+Dialogue: 0,0:21:59.25,0:22:05.12,Default,,0,0,0,,Let's do the best with the three of us, no,\Nthe four of us including Hiroyuki!
+Dialogue: 0,0:22:06.08,0:22:07.75,Default,,0,0,0,,Yes!
+Dialogue: 0,0:22:07.75,0:22:08.91,Default,,0,0,0,,Four?
+Dialogue: 0,0:22:13.16,0:22:14.37,Default,,0,0,0,,Who are you?
+Dialogue: 0,0:23:45.91,0:23:49.91,Default,,0,0,0,,Next time: "Quest x Demon Beast Killer."
+
