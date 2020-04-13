@@ -19,7 +19,7 @@ class Substation(object):
         return Path(self.filepath).read_text(encoding="utf8")
 
     def convert(self):
-        cleaning_old_format = re.compile(r"\{\\[\w\S]+\)\}|\{\\\w*\d*\}")
+        cleaning_old_format = re.compile(r"{.*?}")
         dialog_mask = re.compile(r"Dialogue: \d,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*,.*.*,.*,.*,.*,(.*)")
         dialogs = re.findall(dialog_mask, re.sub(cleaning_old_format, "", self.raw_text))
         dialogs = sorted(list(filter(lambda x: x[2], dialogs)))
@@ -35,7 +35,7 @@ class Substation(object):
 
         text = raw_text.strip()
         line_text = text.split(r'\N')
-        return '\n'.join([item.strip() for item in line_text])
+        return '\n'.join([item.strip() for item in line_text]).strip()
 
     def subtitle_formatting(self, dialogs: List):
         """
