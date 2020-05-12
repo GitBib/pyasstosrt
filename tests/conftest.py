@@ -1,9 +1,10 @@
 import pytest
-
-from pyasstosrt import Substation
+from pathlib import Path
+from pyasstosrt import Subtitle
 
 
 @pytest.fixture
 def sub():
-    sub = Substation('tests/sub.ass')
+    file = Path('tests/sub.ass').read_text(encoding="utf8")
+    sub = Subtitle(file)
     return sub
