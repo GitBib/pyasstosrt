@@ -24,9 +24,9 @@ class Time(object):
         :return: The difference between the beginning and end of subtitles
         """
         return (self.hour - other.hour) * 3600 + \
-                (self.minute - other.minute) * 60 + \
-                (self.second - other.second) + \
-                (self.millisecond - other.millisecond) / 1000
+               (self.minute - other.minute) * 60 + \
+               (self.second - other.second) + \
+               (self.millisecond - other.millisecond) / 1000
 
     def __str__(self):
         """
