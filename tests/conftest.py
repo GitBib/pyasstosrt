@@ -4,7 +4,6 @@ import os
 from pyasstosrt import Subtitle
 
 myPath = os.path.dirname(os.path.abspath(__file__))
-print(myPath)
 sys.path.insert(0, myPath + '/../')
 
 
