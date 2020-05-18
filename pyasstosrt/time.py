@@ -14,6 +14,8 @@ class Time(object):
         s = text.split(':')
         self.hour, self.minute = [int(sr) for sr in s[:-1]]
         self.second, self.millisecond = [int(sr) for sr in s[-1].split('.')]
+        # fix for srt
+        self.millisecond *= 10
 
     def __sub__(self, other):
         """
@@ -33,6 +35,6 @@ class Time(object):
 
         Format the time for str subtitles.
 
-        :return: We get the format string '0:00:00,00'
+        :return: We get the format string '0:00:00,000'
         """
-        return f'{self.hour:02d}:{self.minute:02d}:{self.second:02d},{self.millisecond:02d}'
+        return f'{self.hour:02d}:{self.minute:02d}:{self.second:02d},{self.millisecond:03d}'

@@ -1,6 +1,6 @@
 import os
-from pathlib import Path
 import re
+from pathlib import Path
 from typing import AnyStr, List
 from .dialogue import Dialogue
 
@@ -77,6 +77,7 @@ class Subtitle(object):
         path = Path(self.filepath)
         file = self.file + ".srt"
         if output_dir:
+            Path(output_dir).mkdir(parents=True, exist_ok=True)
             out_path = os.path.join(output_dir, file)
         else:
             out_path = os.path.join(path.parent, file)
