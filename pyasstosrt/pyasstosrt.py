@@ -8,7 +8,7 @@ from .dialogue import Dialogue
 class Subtitle(object):
     """
 
-    Converting ass to art
+    Converting ass to art.
 
     :type filepath: Path to a file that contains text in Advanced SubStation Alpha format
     """
@@ -53,7 +53,7 @@ class Subtitle(object):
     def subtitle_formatting(self, dialogues: List):
         """
 
-        Formatting ass into srt
+        Formatting ass into srt.
 
         :param dialogues: Prepared dialogues
         :return: Prepared dialogue sheet
