@@ -10,7 +10,7 @@ class Dialogue(object):
     def __init__(self, index: int, start: str, end: str, text: str):
         """
 
-        Dialogue structure
+        Dialogue structure.
 
         :param index: Must contain a position of dialogue
         :param start: Start time of the dialogue
@@ -34,7 +34,7 @@ class Dialogue(object):
     def __str__(self) -> str:
         """
 
-        Formatting the dialogue in string
+        Formatting the dialogue in string.
 
         :return: We get a dialogue in string
         """
