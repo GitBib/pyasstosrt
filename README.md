@@ -25,6 +25,17 @@ sub = Subtitle(path)
 sub.export()
 ```
 
+CLI
+------------
+```bash
+pyasstosrt --filepath=/Users/user/sub/sub.ass export
+```
+
+**Optional** You can specify an export folder.
+```bash
+pyasstosrt --filepath=/Users/user/sub/sub.ass export /Users/user/sub/srt
+```
+
 Installation
 ------------
 Most users will want to simply install the latest version, hosted on PyPI:

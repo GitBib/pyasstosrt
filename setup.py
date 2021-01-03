@@ -28,7 +28,12 @@ setup(
     ),
     license="Apache License, Version 2.0, see LICENSE file",
     packages=find_packages(exclude=["tests", "testapp"]),
-    install_requires=['setuptools'],
+    install_requires=['setuptools', 'fire>=0.3.1', 'pyfiglet'],
+    py_modules=['batch'],
+    entry_points="""
+    [console_scripts]
+    pyasstosrt = batch:main
+    """,
     include_package_data=True,
     zip_safe=False,
     classifiers=[
