@@ -1,7 +1,9 @@
 import os
 import re
+from os.path import isfile
 from pathlib import Path
-from typing import AnyStr, List
+from typing import AnyStr, List, Union
+
 from .dialogue import Dialogue
 
 
@@ -13,9 +15,17 @@ class Subtitle(object):
     :type filepath: Path to a file that contains text in Advanced SubStation Alpha format
     """
 
-    def __init__(self, filepath: AnyStr):
-        self.filepath: AnyStr = filepath
-        self.file: AnyStr = Path(filepath).stem
+    def __init__(self, filepath: Union[str, os.PathLike]):
+        if not isfile(filepath):
+            raise FileNotFoundError('"{}" does not exist'.format(filepath))
+        if isinstance(filepath, os.PathLike):
+            self.filepath: AnyStr = str(filepath)
+            self.file: AnyStr = filepath.stem
+        elif isinstance(filepath, str):
+            self.filepath: AnyStr = filepath
+            self.file: AnyStr = Path(filepath).stem
+        else:
+            raise TypeError('"{}" is not of type str'.format(filepath))
         self.raw_text: AnyStr = self.get_text()
         self.dialogues: List = list()
 
