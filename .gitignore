@@ -205,3 +205,4 @@ fabric.properties
 /.idea/
 /simple.py
 /tests/sub.srt
+/tests/test/sub.srt
