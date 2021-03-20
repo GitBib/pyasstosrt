@@ -1,7 +1,7 @@
 from .time import Time
 
 
-class Dialogue(object):
+class Dialogue:
     start: Time
     end: Time
     text: str
@@ -9,7 +9,6 @@ class Dialogue(object):
 
     def __init__(self, index: int, start: str, end: str, text: str):
         """
-
         Dialogue structure.
 
         :param index: Must contain a position of dialogue
@@ -24,7 +23,6 @@ class Dialogue(object):
 
     def get_timestamp(self) -> str:
         """
-
         Format a time line for srt.
 
         :return: Let's finish the line of the beginning and end of the dialogue...
@@ -33,7 +31,6 @@ class Dialogue(object):
 
     def __str__(self) -> str:
         """
-
         Formatting the dialogue in string.
 
         :return: We get a dialogue in string

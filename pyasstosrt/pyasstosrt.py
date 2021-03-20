@@ -7,13 +7,13 @@ from typing import AnyStr, List, Union
 from .dialogue import Dialogue
 
 
-class Subtitle(object):
+class Subtitle:
     """
-
     Converting ass to art.
 
     :type filepath: Path to a file that contains text in Advanced SubStation Alpha format
     """
+    dialog_mask = re.compile(r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*?,\d+,\d+,\d+,.*?,(.*)")
 
     def __init__(self, filepath: Union[str, os.PathLike]):
         if not isfile(filepath):
@@ -27,21 +27,23 @@ class Subtitle(object):
         else:
             raise TypeError('"{}" is not of type str'.format(filepath))
         self.raw_text: AnyStr = self.get_text()
-        self.dialogues: List = list()
+        self.dialogues: List = []
 
     def get_text(self) -> AnyStr:
+        """
+        Reads the file and returns the complete contents
+        :return: File contents
+        """
         return Path(self.filepath).read_text(encoding="utf8")
 
     def convert(self):
         """
-
         Convert the format ass subtitles to srt.
 
         :return:
         """
         cleaning_old_format = re.compile(r"{.*?}")
-        dialog_mask = re.compile(r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*?,\d+,\d+,\d+,.*?,(.*)")
-        dialogs = re.findall(dialog_mask, re.sub(cleaning_old_format, "", self.raw_text))
+        dialogs = re.findall(self.dialog_mask, re.sub(cleaning_old_format, "", self.raw_text))
         dialogs = sorted(list(filter(lambda x: x[2], dialogs)))
 
         self.subtitle_formatting(dialogs)
@@ -49,20 +51,18 @@ class Subtitle(object):
     @staticmethod
     def text_clearing(raw_text: str) -> str:
         """
-
         We're clearing the text from unnecessary tags.
 
         :param raw_text: Dialog text with whitespace characters
         :return: Dialog text without whitespaces and with the right move to a new line
         """
 
-        text = raw_text.replace('\h', '\xa0').strip()
+        text = raw_text.replace(r'\h', '\xa0').strip()
         line_text = text.split(r'\N')
-        return '\n'.join([item.strip() for item in line_text]).strip()
+        return '\n'.join(item.strip() for item in line_text).strip()
 
     def subtitle_formatting(self, dialogues: List):
         """
-
         Formatting ass into srt.
 
         :param dialogues: Prepared dialogues
@@ -74,12 +74,12 @@ class Subtitle(object):
             dialogue = Dialogue(index, start, end, text)
             self.dialogues.append(dialogue)
 
-    def export(self, output_dir: AnyStr = None):
+    def export(self, output_dir: AnyStr = None, encoding: AnyStr = "utf8"):
         """
-
         Export the subtitles to a file.
 
         :param output_dir: Export path SubRip file
+        :param encoding: In which encoding you should save the file
         :return: SubRip file
         """
 
@@ -91,6 +91,6 @@ class Subtitle(object):
             out_path = os.path.join(output_dir, file)
         else:
             out_path = os.path.join(path.parent, file)
-        with open(out_path, encoding="utf8", mode="w") as writer:
+        with open(out_path, encoding=encoding, mode="w") as writer:
             for dialogue in self.dialogues:
                 writer.write(str(dialogue))

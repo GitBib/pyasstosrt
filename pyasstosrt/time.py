@@ -1,4 +1,4 @@
-class Time(object):
+class Time:
     hour: int
     minute: int
     second: int
@@ -6,7 +6,6 @@ class Time(object):
 
     def __init__(self, text: str):
         """
-
         Time data structure.
 
         :param text: format time '0:00:00.00'
@@ -19,7 +18,6 @@ class Time(object):
 
     def __sub__(self, other):
         """
-
         We get the duration of the subtitles.
 
         :param other: Another time structure
@@ -32,7 +30,6 @@ class Time(object):
 
     def __str__(self):
         """
-
         Format the time for str subtitles.
 
         :return: We get the format string '0:00:00,000'

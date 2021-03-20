@@ -8,8 +8,12 @@ from .pyasstosrt import Subtitle
 from .time import Time
 from .dialogue import Dialogue
 
-VERSION = (1, 1, 0)
+VERSION = (1, 1, 1)
 __version__ = ".".join(map(str, VERSION))
 
 __author__ = 'GitBib'
 __email__ = 'pyasstosrt@bnff.website'
+
+__all__ = [
+    "Subtitle", "Time", "Dialogue"
+]
