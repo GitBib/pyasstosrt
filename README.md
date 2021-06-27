@@ -1,7 +1,7 @@
 pyasstosrt
 =================================================================================================================================================================================
 
-[![Build Status](https://travis-ci.com/GitBib/pyasstosrt.svg?branch=master)](https://travis-ci.com/GitBib/pyasstosrt) [![alt text](https://img.shields.io/pypi/v/pyasstosrt.svg?style=flat)](https://pypi.org/project/pyasstosrt/) [![Downloads](https://pepy.tech/badge/asstosrt)](https://pepy.tech/project/asstosrt)
+[![Build Status](https://travis-ci.com/GitBib/pyasstosrt.svg?branch=master)](https://travis-ci.com/GitBib/pyasstosrt) [![alt text](https://img.shields.io/pypi/v/pyasstosrt.svg?style=flat)](https://pypi.org/project/pyasstosrt/) [![Downloads](https://pepy.tech/badge/pyasstosrt)](https://pepy.tech/project/pyasstosrt)
 
 **pyasstosrt** – this tool will help you convert Advanced SubStation Alpha (ASS/SSA) subtitle files to SubRip (SRT) files.
 
