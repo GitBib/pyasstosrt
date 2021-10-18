@@ -2,7 +2,7 @@ import os
 import re
 from os.path import isfile
 from pathlib import Path
-from typing import AnyStr, List, Union
+from typing import AnyStr, List, Union, Optional
 
 from .dialogue import Dialogue
 
@@ -74,16 +74,21 @@ class Subtitle:
             dialogue = Dialogue(index, start, end, text)
             self.dialogues.append(dialogue)
 
-    def export(self, output_dir: AnyStr = None, encoding: AnyStr = "utf8"):
+    def export(self, output_dir: AnyStr = None, ret_dialogues: bool = False, encoding: AnyStr = "utf8") -> Optional[List]:
         """
-        Export the subtitles to a file.
+        If ret_dialogues parameter is False exports the subtitles to a file.
 
         :param output_dir: Export path SubRip file
+        :param ret_dialogues: Whereas it should return a list of dialogues not creating a srt file
         :param encoding: In which encoding you should save the file
-        :return: SubRip file
+        :return: List of dialogues
         """
 
         self.convert()
+
+        if ret_dialogues:
+            return self.dialogues
+
         path = Path(self.filepath)
         file = self.file + ".srt"
         if output_dir:
@@ -94,3 +99,5 @@ class Subtitle:
         with open(out_path, encoding=encoding, mode="w") as writer:
             for dialogue in self.dialogues:
                 writer.write(str(dialogue))
+
+        return None
