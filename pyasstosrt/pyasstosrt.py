@@ -99,5 +99,3 @@ class Subtitle:
         with open(out_path, encoding=encoding, mode="w") as writer:
             for dialogue in self.dialogues:
                 writer.write(str(dialogue))
-
-        return None
