@@ -25,6 +25,17 @@ sub = Subtitle(path)
 sub.export()
 ```
 
+You can get a sheet with dialogue by specifying output_dialogues.
+
+```python
+from pathlib import Path
+
+from pyasstosrt import Subtitle
+
+path = Path('sub.ass')
+sub = Subtitle(path)
+sub.export(output_dialogues=True)
+```
 CLI
 ------------
 ```bash
