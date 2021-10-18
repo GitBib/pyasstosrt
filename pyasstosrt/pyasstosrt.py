@@ -79,7 +79,7 @@ class Subtitle:
         If ret_dialogues parameter is False exports the subtitles to a file.
 
         :param output_dir: Export path SubRip file
-        :param ret_dialogues: Whereas it should return a list of dialogues not creating a srt file
+        :param ret_dialogues: Whereas it should return a list of dialogues not creating a SubRip file
         :param encoding: In which encoding you should save the file
         :return: List of dialogues
         """
