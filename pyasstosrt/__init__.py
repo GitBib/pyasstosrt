@@ -8,7 +8,7 @@ from .pyasstosrt import Subtitle
 from .time import Time
 from .dialogue import Dialogue
 
-VERSION = (1, 1, 1)
+VERSION = (1, 1, 2)
 __version__ = ".".join(map(str, VERSION))
 
 __author__ = 'GitBib'
