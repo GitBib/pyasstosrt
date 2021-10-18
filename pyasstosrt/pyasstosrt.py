@@ -74,7 +74,12 @@ class Subtitle:
             dialogue = Dialogue(index, start, end, text)
             self.dialogues.append(dialogue)
 
-    def export(self, output_dir: AnyStr = None, encoding: AnyStr = "utf8", output_dialogues: bool = False) -> Optional[List]:
+    def export(
+            self,
+            output_dir: AnyStr = None,
+            encoding: AnyStr = "utf8",
+            output_dialogues: bool = False
+    ) -> Optional[List]:
         """
         If ret_dialogues parameter is False exports the subtitles to a file.
 
