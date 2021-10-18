@@ -74,19 +74,19 @@ class Subtitle:
             dialogue = Dialogue(index, start, end, text)
             self.dialogues.append(dialogue)
 
-    def export(self, output_dir: AnyStr = None, ret_dialogues: bool = False, encoding: AnyStr = "utf8") -> Optional[List]:
+    def export(self, output_dir: AnyStr = None, encoding: AnyStr = "utf8", output_dialogues: bool = False) -> Optional[List]:
         """
         If ret_dialogues parameter is False exports the subtitles to a file.
 
         :param output_dir: Export path SubRip file
-        :param ret_dialogues: Whereas it should return a list of dialogues not creating a SubRip file
         :param encoding: In which encoding you should save the file
+        :param output_dialogues: Whereas it should return a list of dialogues not creating a SubRip file
         :return: List of dialogues
         """
 
         self.convert()
 
-        if ret_dialogues:
+        if output_dialogues:
             return self.dialogues
 
         path = Path(self.filepath)
