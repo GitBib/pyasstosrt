@@ -24,8 +24,6 @@ class Subtitle:
         elif isinstance(filepath, str):
             self.filepath: AnyStr = filepath
             self.file: AnyStr = Path(filepath).stem
-        else:
-            raise TypeError('"{}" is not of type str'.format(filepath))
         self.raw_text: AnyStr = self.get_text()
         self.dialogues: List = []
 

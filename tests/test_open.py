@@ -1,7 +1,8 @@
+from pathlib import Path
+
 import pytest
 
 from pyasstosrt import Subtitle
-from pathlib import Path
 
 
 def test_open():
