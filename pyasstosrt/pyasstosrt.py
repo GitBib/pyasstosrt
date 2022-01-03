@@ -29,7 +29,7 @@ class Subtitle:
         self.raw_text: AnyStr = self.get_text()
         self.dialogues: List = []
 
-    def get_text(self) -> AnyStr:
+    def get_text(self) -> str:
         """
         Reads the file and returns the complete contents
         :return: File contents

@@ -16,7 +16,7 @@ class Time:
         # fix for srt
         self.millisecond *= 10
 
-    def __sub__(self, other):
+    def __sub__(self, other: "Time") -> float:
         """
         We get the duration of the subtitles.
 
@@ -28,7 +28,7 @@ class Time:
                (self.second - other.second) + \
                (self.millisecond - other.millisecond) / 1000
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Format the time for str subtitles.
 
