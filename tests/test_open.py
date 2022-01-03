@@ -1,3 +1,5 @@
+import pytest
+
 from pyasstosrt import Subtitle
 from pathlib import Path
 
@@ -16,24 +18,15 @@ def test_open_use_pathlib():
 
 def test_open_use_object():
     file = open('tests/sub.ass', 'r')
-    try:
+    with pytest.raises(TypeError):
         Subtitle(file)
-        assert False
-    except TypeError:
-        assert True
 
 
 def test_open_folder():
-    try:
+    with pytest.raises(FileNotFoundError):
         Subtitle('tests/')
-        assert False
-    except FileNotFoundError:
-        assert True
 
 
 def test_open_broken_file():
-    try:
+    with pytest.raises(FileNotFoundError):
         Subtitle('tests/sub1.ass')
-        assert False
-    except FileNotFoundError:
-        assert True
