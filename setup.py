@@ -28,7 +28,8 @@ setup(
     ),
     license="Apache License, Version 2.0, see LICENSE file",
     packages=find_packages(exclude=["tests", "testapp"]),
-    install_requires=['setuptools', 'fire>=0.3.1', 'pyfiglet'],
+    install_requires=['setuptools'],
+    extras_require={'cli': ['fire>=0.3.1', 'pyfiglet']},
     py_modules=['batch'],
     entry_points="""
     [console_scripts]
