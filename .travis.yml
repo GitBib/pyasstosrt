@@ -3,7 +3,7 @@ python:
   - "3.6"
   - "3.8"
   - "3.9"
-  - "3.10.2"
+  - "3.10-dev"
 before_install:
   - pip install coverage
 script: coverage run -m pytest
