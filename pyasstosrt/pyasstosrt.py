@@ -15,8 +15,9 @@ class Subtitle:
     """
 
     dialog_mask = re.compile(r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*?,\d+,\d+,\d+,.*?,(.*)")
+    effects = re.compile(r"(\s?[ml].+?\d+.+?\d+)")
 
-    def __init__(self, filepath: Union[str, os.PathLike]):
+    def __init__(self, filepath: Union[str, os.PathLike], removing_effects: bool = False):
         if not isfile(filepath):
             raise FileNotFoundError(f'"{filepath}" does not exist')
         if isinstance(filepath, os.PathLike):
@@ -27,6 +28,7 @@ class Subtitle:
             self.file: AnyStr = Path(filepath).stem
         self.raw_text: AnyStr = self.get_text()
         self.dialogues: List = []
+        self.removing_effects = removing_effects
 
     def get_text(self) -> str:
         """
@@ -43,6 +45,8 @@ class Subtitle:
         """
         cleaning_old_format = re.compile(r"{.*?}")
         dialogs = re.findall(self.dialog_mask, re.sub(cleaning_old_format, "", self.raw_text))
+        if self.removing_effects:
+            dialogs = filter(lambda x: re.sub(self.effects, "", x[2]), dialogs)
         dialogs = sorted(list(filter(lambda x: x[2], dialogs)))
 
         self.subtitle_formatting(dialogs)
