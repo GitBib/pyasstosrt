@@ -3,24 +3,32 @@ language: python
 matrix:
   fast_finish: true
   include:
-    - python:  'pypy3'
     - python:  '3.10.0'
+      dist:  bionic
     - python:  '3.10.1'
+      dist:  bionic
     - python:  '3.10.2'
-    - python:  '3.10'
+      dist:  bionic
     - python:  '3.10'
       dist:  bionic
-    - python:  '3.9'
     - python:  '3.9'
       dist:  bionic
     - python:  '3.8'
+      dist:  bionic
     - python:  '3.7'
+      dist:  bionic
     - python:  'nightly'
+      dist:  bionic
     - python:  '3.11-dev'
+      dist:  bionic
     - python:  '3.10-dev'
+      dist:  bionic
     - python:  '3.9-dev'
+      dist:  bionic
     - python:  '3.8-dev'
+      dist:  bionic
     - python:  '3.7-dev'
+      dist:  bionic
 
 before_install:
   - pip install coverage
