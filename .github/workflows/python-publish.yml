@@ -28,7 +28,7 @@ jobs:
     - name: Install App Dependencies
       run: poetry install --no-interaction --no-root --no-dev
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v2
+      uses: codecov/codecov-action@v3
       with:
         fail_ci_if_error: false
         token: ${{ secrets.CODECOV_TOKEN }}
