@@ -4,16 +4,14 @@
 :license: Apache License, Version 2.0, see LICENSE file
 :copyright: (c) 2021 GitBib
 """
+from .dialogue import Dialogue
 from .pyasstosrt import Subtitle
 from .time import Time
-from .dialogue import Dialogue
 
-VERSION = (1, 2, 0)
+VERSION = (1, 2, 1)
 __version__ = ".".join(map(str, VERSION))
 
-__author__ = 'GitBib'
-__email__ = 'pyasstosrt@bnff.website'
+__author__ = "GitBib"
+__email__ = "pyasstosrt@bnff.website"
 
-__all__ = [
-    "Subtitle", "Time", "Dialogue"
-]
+__all__ = ["Subtitle", "Time", "Dialogue"]
