@@ -93,8 +93,6 @@ logging-modules=["logging","picologging"]
 [tool.coverage.run]
 omit = ["*/tests/*"]
 
-[tool.coverage.report]
-
 [tool.pycln]
 all = true
 
