@@ -10,9 +10,9 @@ class Time:
 
         :param text: format time '0:00:00.00'
         """
-        s = text.split(':')
+        s = text.split(":")
         self.hour, self.minute = [int(sr) for sr in s[:-1]]
-        self.second, self.millisecond = [int(sr) for sr in s[-1].split('.')]
+        self.second, self.millisecond = [int(sr) for sr in s[-1].split(".")]
         # fix for srt
         self.millisecond *= 10
 
@@ -23,10 +23,12 @@ class Time:
         :param other: Another time structure
         :return: The difference between the beginning and end of subtitles
         """
-        return (self.hour - other.hour) * 3600 + \
-               (self.minute - other.minute) * 60 + \
-               (self.second - other.second) + \
-               (self.millisecond - other.millisecond) / 1000
+        return (
+            (self.hour - other.hour) * 3600
+            + (self.minute - other.minute) * 60
+            + (self.second - other.second)
+            + (self.millisecond - other.millisecond) / 1000
+        )
 
     def __str__(self) -> str:
         """
@@ -34,4 +36,4 @@ class Time:
 
         :return: We get the format string '0:00:00,000'
         """
-        return f'{self.hour:02d}:{self.minute:02d}:{self.second:02d},{self.millisecond:03d}'
+        return f"{self.hour:02d}:{self.minute:02d}:{self.second:02d},{self.millisecond:03d}"

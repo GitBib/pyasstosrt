@@ -2,7 +2,7 @@ import os
 import re
 from os.path import isfile
 from pathlib import Path
-from typing import AnyStr, List, Union, Optional
+from typing import AnyStr, List, Optional, Union
 
 from .dialogue import Dialogue
 
@@ -13,11 +13,12 @@ class Subtitle:
 
     :type filepath: Path to a file that contains text in Advanced SubStation Alpha format
     """
+
     dialog_mask = re.compile(r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*?,\d+,\d+,\d+,.*?,(.*)")
 
     def __init__(self, filepath: Union[str, os.PathLike]):
         if not isfile(filepath):
-            raise FileNotFoundError('"{}" does not exist'.format(filepath))
+            raise FileNotFoundError(f'"{filepath}" does not exist')
         if isinstance(filepath, os.PathLike):
             self.filepath: AnyStr = str(filepath)
             self.file: AnyStr = filepath.stem
@@ -55,9 +56,9 @@ class Subtitle:
         :return: Dialog text without whitespaces and with the right move to a new line
         """
 
-        text = raw_text.replace(r'\h', '\xa0').strip()
-        line_text = text.split(r'\N')
-        return '\n'.join(item.strip() for item in line_text).strip()
+        text = raw_text.replace(r"\h", "\xa0").strip()
+        line_text = text.split(r"\N")
+        return "\n".join(item.strip() for item in line_text).strip()
 
     def subtitle_formatting(self, dialogues: List):
         """
@@ -73,10 +74,7 @@ class Subtitle:
             self.dialogues.append(dialogue)
 
     def export(
-            self,
-            output_dir: AnyStr = None,
-            encoding: AnyStr = "utf8",
-            output_dialogues: bool = False
+        self, output_dir: AnyStr = None, encoding: AnyStr = "utf8", output_dialogues: bool = False
     ) -> Optional[List]:
         """
         If ret_dialogues parameter is False exports the subtitles to a file.
