@@ -51,4 +51,6 @@ Installation
 ------------
 Most users will want to simply install the latest version, hosted on PyPI:
 
-    $ pip install pyasstosrt
+    $ pip install "pyasstosrt[cli]"
+
+If you just want to use it as a library and don't need the CLI, you can omit the `[cli]` extra.

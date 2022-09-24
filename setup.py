@@ -19,17 +19,18 @@ setup(
     version=version,
     description="Convert ASS subtitle to SRT format",
     long_description=read('README.md'),
-    long_description_content_type='text/markdown',
+    long_description_content_type="text/markdown",
     author="Ivan Vyalov",
     author_email="me@bnff.website",
     url="https://github.com/GitBib/pyasstosrt",
-    download_url='https://github.com/GitBib/pyasstosrt/archive/{}.zip'.format(
+    download_url="https://github.com/GitBib/pyasstosrt/archive/{}.zip".format(
         version
     ),
     license="Apache License, Version 2.0, see LICENSE file",
     packages=find_packages(exclude=["tests", "testapp"]),
-    install_requires=['setuptools', 'fire>=0.3.1', 'pyfiglet'],
-    py_modules=['batch'],
+    install_requires=["setuptools"],
+    extras_require={"cli": ["fire>=0.3.1", "pyfiglet"]},
+    py_modules=["batch"],
     entry_points="""
     [console_scripts]
     pyasstosrt = batch:main
