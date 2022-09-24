@@ -1,15 +1,11 @@
-import sys
-
 try:
     import fire
     from pyfiglet import Figlet
 except ModuleNotFoundError:
-    print(
-        'ERROR: pyasstosrt was installed without the cli extra. '
-        'Please reinstall it with: pip install "pyasstosrt[cli]"',
-        file=sys.stderr
+    raise ImportError(
+        'pyasstosrt was installed without the cli extra. '
+        'Please reinstall it with: pip install "pyasstosrt[cli]"'
     )
-    sys.exit(1)
 
 from pyasstosrt import Subtitle, __version__
 
