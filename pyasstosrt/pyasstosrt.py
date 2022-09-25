@@ -12,6 +12,7 @@ class Subtitle:
     Converting ass to art.
 
     :type filepath: Path to a file that contains text in Advanced SubStation Alpha format
+    :type removing_effects: Whether to remove effects from the text
     """
 
     dialog_mask = re.compile(r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*?,\d+,\d+,\d+,.*?,(.*)")
