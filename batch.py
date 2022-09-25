@@ -3,7 +3,7 @@ try:
     from pyfiglet import Figlet
 except ModuleNotFoundError:
     raise ImportError(
-        "pyasstosrt was installed without the cli extra." 'Please reinstall it with: pip install "pyasstosrt[cli]"'
+        "pyasstosrt was installed without the cli extra. Please reinstall it with: pip install 'pyasstosrt[cli]'"
     )
 
 from pyasstosrt import Subtitle, __version__
