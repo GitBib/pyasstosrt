@@ -36,6 +36,15 @@ path = Path('sub.ass')
 sub = Subtitle(path)
 sub.export(output_dialogues=True)
 ```
+
+If you want to remove effects from text, you can use the removing_effects.
+
+```python
+from pyasstosrt import Subtitle
+
+sub = Subtitle('sub.ass', removing_effects=True)
+sub.export()
+```
 CLI
 ------------
 ```bash
@@ -47,10 +56,14 @@ pyasstosrt --filepath=/Users/user/sub/sub.ass export
 pyasstosrt --filepath=/Users/user/sub/sub.ass export /Users/user/sub/srt
 ```
 
+**Optional** If you want to remove effects from text, you can use the --removing_effects flag.
+```bash
+pyasstosrt --filepath=/Users/user/sub/sub.ass --removing_effects=True export /Users/user/sub/srt
+```
 Installation
 ------------
 Most users will want to simply install the latest version, hosted on PyPI:
 
-    $ pip install "pyasstosrt[cli]"
+    $ pip install 'pyasstosrt[cli]'
 
 If you just want to use it as a library and don't need the CLI, you can omit the `[cli]` extra.
