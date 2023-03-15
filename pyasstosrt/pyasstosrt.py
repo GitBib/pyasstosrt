@@ -18,7 +18,12 @@ class Subtitle:
     dialog_mask = re.compile(r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*?,\d+,\d+,\d+,.*?,(.*)")
     effects = re.compile(r"(\s?[ml].+?(\d+(?:\.\d+)?).+?(\d+(?:\.\d+)?))")
 
-    def __init__(self, filepath: Union[str, os.PathLike], removing_effects: bool = False):
+    def __init__(
+        self,
+        filepath: Union[str, os.PathLike],
+        removing_effects: bool = False,
+        remove_duplicates: bool = False,
+    ):
         if not isfile(filepath):
             raise FileNotFoundError(f'"{filepath}" does not exist')
         if isinstance(filepath, os.PathLike):
@@ -30,6 +35,7 @@ class Subtitle:
         self.raw_text: AnyStr = self.get_text()
         self.dialogues: List = []
         self.removing_effects = removing_effects
+        self.is_remove_duplicates = remove_duplicates
 
     def get_text(self) -> str:
         """
@@ -65,6 +71,27 @@ class Subtitle:
         line_text = text.split(r"\N")
         return "\n".join(item.strip() for item in line_text).strip()
 
+    @staticmethod
+    def remove_duplicates(dialogues: List):
+        """
+        Remove consecutive duplicate dialogues in the given list and merge their time ranges.
+
+        :param dialogues: A list of dialogues, where each dialogue is a tuple (start, end, text)
+        :return: A list of dialogues with consecutive duplicates removed and time ranges merged
+        """
+        cleaned_dialogues = [dialogues[0]]
+
+        for prev_dialogue, curr_dialogue in zip(dialogues[:-1], dialogues[1:]):
+            prev_start, prev_end, prev_text = prev_dialogue
+            curr_start, curr_end, curr_text = curr_dialogue
+
+            if prev_text != curr_text:
+                cleaned_dialogues.append(curr_dialogue)
+            else:
+                cleaned_dialogues[-1] = (prev_start, curr_end, curr_text)
+
+        return cleaned_dialogues
+
     def subtitle_formatting(self, dialogues: List):
         """
         Formatting ass into srt.
@@ -72,7 +99,9 @@ class Subtitle:
         :param dialogues: Prepared dialogues
         :return: Prepared dialogue sheet
         """
-        for index, values in enumerate(dialogues, start=1):
+        cleaned_dialogues = self.remove_duplicates(dialogues) if self.is_remove_duplicates else dialogues
+
+        for index, values in enumerate(cleaned_dialogues, start=1):
             start, end, text = values
             text = self.text_clearing(text.strip())
             dialogue = Dialogue(index, start, end, text)
