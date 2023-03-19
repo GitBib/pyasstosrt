@@ -24,10 +24,10 @@ jobs:
         virtualenvs-in-project: true
         installer-parallel: true
     - name: Install App Dependencies
-      run: poetry install --no-interaction --no-root --no-dev
-    - name: Install Dev Dependencies
-      if: github.event_name == 'pull_request'
       run: poetry install --no-interaction --no-root
+    - name: Run tests
+      run: |
+        poetry run pytest
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
@@ -39,7 +39,3 @@ jobs:
       run: |
         poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
         poetry publish --build --no-interaction
-    - name: Run tests
-      if: github.event_name == 'pull_request'
-      run: |
-        poetry run pytest
