@@ -29,13 +29,14 @@ jobs:
       run: poetry install --no-interaction --no-root
     - name: Run tests
       run: |
-        poetry run pytest
-        poetry run pytest --cov .
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        fail_ci_if_error: false
-        token: ${{ secrets.CODECOV_TOKEN }}
+        poetry run pytest --cov
+    - name: Upload coverage reports to Codecov
+      run: |
+        # Replace `linux` below with the appropriate OS
+        # Options are `alpine`, `linux`, `macos`, `windows`
+        curl -Os https://uploader.codecov.io/latest/linux/codecov
+        chmod +x codecov
+        ./codecov -t ${{ secrets.CODECOV_TOKEN }}
     - name: publish
       if: github.event_name == 'release'
       shell: bash
