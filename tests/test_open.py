@@ -17,17 +17,16 @@ def test_open_use_pathlib():
     assert sub
 
 
-def test_open_use_object():
-    file = open('tests/sub.ass', 'r')
-    with pytest.raises(TypeError):
-        Subtitle(file)
-
-
-def test_open_folder():
-    with pytest.raises(FileNotFoundError):
-        Subtitle('tests/')
-
-
-def test_open_broken_file():
-    with pytest.raises(FileNotFoundError):
-        Subtitle('tests/sub1.ass')
+@pytest.mark.parametrize("file_path, expected_error", [
+    ('tests/sub.ass', TypeError),
+    ('tests/', FileNotFoundError),
+    ('tests/sub1.ass', FileNotFoundError),
+])
+def test_open_errors(file_path, expected_error):
+    if expected_error == TypeError:
+        with open(file_path, 'r') as file:
+            with pytest.raises(expected_error):
+                Subtitle(file)
+    else:
+        with pytest.raises(expected_error):
+            Subtitle(file_path)
