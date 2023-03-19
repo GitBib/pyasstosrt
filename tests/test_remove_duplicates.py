@@ -71,5 +71,4 @@ def generate_test_cases():
 def test_remove_duplicates(sub, input_list, expected_output):
     instance = sub
     result = instance.remove_duplicates(input_list)
-    print(result)
     assert result == expected_output
