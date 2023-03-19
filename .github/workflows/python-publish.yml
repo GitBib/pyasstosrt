@@ -1,11 +1,9 @@
-# This workflows will upload a Python Package using Twine when a release is created
-# For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
-
-name: Upload Python Package
+name: Upload Python Package and Run Tests
 
 on:
   release:
     types: [created]
+  pull_request:
 
 jobs:
   deploy:
@@ -27,13 +25,21 @@ jobs:
         installer-parallel: true
     - name: Install App Dependencies
       run: poetry install --no-interaction --no-root --no-dev
+    - name: Install Dev Dependencies
+      if: github.event_name == 'pull_request'
+      run: poetry install --no-interaction --no-root
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
         fail_ci_if_error: false
         token: ${{ secrets.CODECOV_TOKEN }}
     - name: publish
+      if: github.event_name == 'release'
       shell: bash
       run: |
         poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
         poetry publish --build --no-interaction
+    - name: Run tests
+      if: github.event_name == 'pull_request'
+      run: |
+        poetry run pytest
