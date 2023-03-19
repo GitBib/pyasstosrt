@@ -25,6 +25,9 @@ jobs:
         installer-parallel: true
     - name: Install App Dependencies
       run: poetry install --no-interaction --no-root --no-dev
+    - name: Install Dev Dependencies
+      if: github.event_name == 'pull_request'
+      run: poetry install --no-interaction --no-root --dev
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
