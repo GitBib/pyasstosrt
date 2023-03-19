@@ -29,8 +29,7 @@ jobs:
       run: poetry install --no-interaction --no-root
     - name: Run tests
       run: |
-        poetry run pytest --cov
-        coverage run -m pytest
+        poetry run coverage run -m pytest
     - name: Upload coverage reports to Codecov
       run: |
         # Replace `linux` below with the appropriate OS
