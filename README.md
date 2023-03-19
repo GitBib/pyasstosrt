@@ -45,6 +45,15 @@ from pyasstosrt import Subtitle
 sub = Subtitle('sub.ass', removing_effects=True)
 sub.export()
 ```
+
+You can enable the deletion of duplicate lines with the rearrangement of start and end times.
+
+```python
+from pyasstosrt import Subtitle
+
+sub = Subtitle('sub.ass', remove_duplicates=True)
+sub.export()
+```
 CLI
 ------------
 ```bash
