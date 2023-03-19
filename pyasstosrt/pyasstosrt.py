@@ -2,7 +2,7 @@ import os
 import re
 from os.path import isfile
 from pathlib import Path
-from typing import AnyStr, List, Optional, Union
+from typing import AnyStr, List, Optional, Tuple, Union
 
 from .dialogue import Dialogue
 
@@ -72,25 +72,32 @@ class Subtitle:
         return "\n".join(item.strip() for item in line_text).strip()
 
     @staticmethod
-    def remove_duplicates(dialogues: List):
+    def merged_dialogues(dialogues: List) -> List[Tuple[int, int, str]]:
+        """
+        Group consecutive dialogues with the same text into a single dialogue with a merged time range.
+
+        :return: A generator that iterates over the input dialogues and groups consecutive dialogues
+            with the same text into a single dialogue with a merged time range.
+        """
+        curr_dialogue = None
+        for start, end, text in dialogues:
+            if curr_dialogue is None:
+                curr_dialogue = (start, end, text)
+            elif text == curr_dialogue[2]:
+                curr_dialogue = (curr_dialogue[0], end, text)
+            else:
+                yield curr_dialogue
+                curr_dialogue = (start, end, text)
+        if curr_dialogue is not None:
+            yield curr_dialogue
+
+    def remove_duplicates(self, dialogues: List):
         """
         Remove consecutive duplicate dialogues in the given list and merge their time ranges.
-
         :param dialogues: A list of dialogues, where each dialogue is a tuple (start, end, text)
         :return: A list of dialogues with consecutive duplicates removed and time ranges merged
         """
-        cleaned_dialogues = [dialogues[0]]
-
-        for prev_dialogue, curr_dialogue in zip(dialogues[:-1], dialogues[1:]):
-            prev_start, prev_end, prev_text = prev_dialogue
-            curr_start, curr_end, curr_text = curr_dialogue
-
-            if prev_text != curr_text:
-                cleaned_dialogues.append(curr_dialogue)
-            else:
-                cleaned_dialogues[-1] = (prev_start, curr_end, curr_text)
-
-        return cleaned_dialogues
+        return list(self.merged_dialogues(dialogues))
 
     def subtitle_formatting(self, dialogues: List):
         """
