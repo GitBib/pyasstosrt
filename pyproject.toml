@@ -12,11 +12,11 @@ classifiers = [
     'License :: OSI Approved :: Apache Software License',
     'Operating System :: OS Independent',
     'Programming Language :: Python',
-    'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
     'Programming Language :: Python :: Implementation :: PyPy',
     'Programming Language :: Python :: Implementation :: CPython',
 ]
@@ -25,14 +25,16 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.6,<4.0"
+python = ">=3.7,<4.0"
 fire = { version = ">=0.3.1", optional = true }
 pyfiglet = { version = "*", optional = true }
 
 [tool.poetry.dev-dependencies]
-pre-commit = "*"
-pytest = "*"
-pytest-cov = "*"
+pre-commit = "^2.1.1"
+pytest = "^7.2.2"
+pytest-cov = "^4.0.0"
+coverage = "^7.2.2"
+codecov = "^2.1.12"
 
 [tool.poetry.extras]
 cli = ["fire", "pyfiglet"]
