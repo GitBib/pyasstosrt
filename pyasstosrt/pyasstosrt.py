@@ -72,7 +72,7 @@ class Subtitle:
         return "\n".join(item.strip() for item in line_text).strip()
 
     @staticmethod
-    def merged_dialogues(dialogues: List) -> List[Tuple[int, int, str]]:
+    def merged_dialogues(dialogues: List) -> List[Tuple[str, str, str]]:
         """
         Group consecutive dialogues with the same text into a single dialogue with a merged time range.
 
@@ -132,7 +132,7 @@ class Subtitle:
             return self.dialogues
 
         path = Path(self.filepath)
-        file = self.file + ".srt"
+        file = f"{self.file}.srt"
         if output_dir:
             Path(output_dir).mkdir(parents=True, exist_ok=True)
             out_path = os.path.join(output_dir, file)
