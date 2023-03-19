@@ -2,7 +2,7 @@ import os
 import re
 from os.path import isfile
 from pathlib import Path
-from typing import AnyStr, List, Optional, Union
+from typing import AnyStr, List, Optional, Tuple, Union
 
 from .dialogue import Dialogue
 
@@ -18,7 +18,12 @@ class Subtitle:
     dialog_mask = re.compile(r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*?,\d+,\d+,\d+,.*?,(.*)")
     effects = re.compile(r"(\s?[ml].+?(\d+(?:\.\d+)?).+?(\d+(?:\.\d+)?))")
 
-    def __init__(self, filepath: Union[str, os.PathLike], removing_effects: bool = False):
+    def __init__(
+        self,
+        filepath: Union[str, os.PathLike],
+        removing_effects: bool = False,
+        remove_duplicates: bool = False,
+    ):
         if not isfile(filepath):
             raise FileNotFoundError(f'"{filepath}" does not exist')
         if isinstance(filepath, os.PathLike):
@@ -30,6 +35,7 @@ class Subtitle:
         self.raw_text: AnyStr = self.get_text()
         self.dialogues: List = []
         self.removing_effects = removing_effects
+        self.is_remove_duplicates = remove_duplicates
 
     def get_text(self) -> str:
         """
@@ -65,6 +71,34 @@ class Subtitle:
         line_text = text.split(r"\N")
         return "\n".join(item.strip() for item in line_text).strip()
 
+    @staticmethod
+    def merged_dialogues(dialogues: List) -> List[Tuple[str, str, str]]:
+        """
+        Group consecutive dialogues with the same text into a single dialogue with a merged time range.
+
+        :return: A generator that iterates over the input dialogues and groups consecutive dialogues
+            with the same text into a single dialogue with a merged time range.
+        """
+        curr_dialogue = None
+        for start, end, text in dialogues:
+            if curr_dialogue is None:
+                curr_dialogue = (start, end, text)
+            elif text == curr_dialogue[2]:
+                curr_dialogue = (curr_dialogue[0], end, text)
+            else:
+                yield curr_dialogue
+                curr_dialogue = (start, end, text)
+        if curr_dialogue is not None:
+            yield curr_dialogue
+
+    def remove_duplicates(self, dialogues: List):
+        """
+        Remove consecutive duplicate dialogues in the given list and merge their time ranges.
+        :param dialogues: A list of dialogues, where each dialogue is a tuple (start, end, text)
+        :return: A list of dialogues with consecutive duplicates removed and time ranges merged
+        """
+        return list(self.merged_dialogues(dialogues))
+
     def subtitle_formatting(self, dialogues: List):
         """
         Formatting ass into srt.
@@ -72,7 +106,9 @@ class Subtitle:
         :param dialogues: Prepared dialogues
         :return: Prepared dialogue sheet
         """
-        for index, values in enumerate(dialogues, start=1):
+        cleaned_dialogues = self.remove_duplicates(dialogues) if self.is_remove_duplicates else dialogues
+
+        for index, values in enumerate(cleaned_dialogues, start=1):
             start, end, text = values
             text = self.text_clearing(text.strip())
             dialogue = Dialogue(index, start, end, text)
@@ -96,7 +132,7 @@ class Subtitle:
             return self.dialogues
 
         path = Path(self.filepath)
-        file = self.file + ".srt"
+        file = f"{self.file}.srt"
         if output_dir:
             Path(output_dir).mkdir(parents=True, exist_ok=True)
             out_path = os.path.join(output_dir, file)
