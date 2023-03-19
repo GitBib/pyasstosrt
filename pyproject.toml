@@ -33,8 +33,9 @@ pyfiglet = { version = "*", optional = true }
 pre-commit = "^2.1.1"
 pytest = "^7.2.2"
 pytest-cov = "^4.0.0"
-coverage = "^7.2.2"
+coverage = "^6.1.1"
 codecov = "^2.1.12"
+coveralls = "^3.3.1"
 
 [tool.poetry.extras]
 cli = ["fire", "pyfiglet"]
