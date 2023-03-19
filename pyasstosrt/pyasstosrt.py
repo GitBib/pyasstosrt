@@ -16,7 +16,7 @@ class Subtitle:
     """
 
     dialog_mask = re.compile(r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*?,\d+,\d+,\d+,.*?,(.*)")
-    effects = re.compile(r"(\s?[ml].+?(\d+(?:\.\d+)?).+?(\d+(?:\.\d+)?))")
+    effects = re.compile(r"(\s?[ml].+?(-?\d+(\.\d+)?).+?(-?\d+(\.\d+)?).+)")
 
     def __init__(
         self,
