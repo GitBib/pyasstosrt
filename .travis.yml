@@ -3,12 +3,10 @@ language: python
 matrix:
   fast_finish: true
   include:
-    - python:  '3.10.0'
-      dist:  bionic
-    - python:  '3.10.1'
-      dist:  bionic
-    - python:  '3.10.2'
-      dist:  bionic
+    - python: '3.12'
+      dist: bionic
+    - python: '3.11'
+      dist: bionic
     - python:  '3.10'
       dist:  bionic
     - python:  '3.9'
