@@ -9,7 +9,7 @@ from .dialogue import Dialogue
 
 class Subtitle:
     """
-    Converting ass to art.
+    Converting ass to srt.
 
     :type filepath: Path to a file that contains text in Advanced SubStation Alpha format
     :type removing_effects: Whether to remove effects from the text
