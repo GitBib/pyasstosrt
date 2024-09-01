@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyasstosrt"
-version = "1.4.0"
+version = "1.4.1"
 description = "Convert ASS subtitle to SRT format"
 authors = ["GitBib <me@bnff.website>"]
 license = "Apache License, Version 2.0, see LICENSE file"
@@ -12,12 +12,12 @@ classifiers = [
     'License :: OSI Approved :: Apache Software License',
     'Operating System :: OS Independent',
     'Programming Language :: Python',
-    'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
     'Programming Language :: Python :: 3.11',
     'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
     'Programming Language :: Python :: Implementation :: PyPy',
     'Programming Language :: Python :: Implementation :: CPython',
 ]
@@ -26,20 +26,15 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.7,<4.0"
-fire = { version = ">=0.3.1", optional = true }
-pyfiglet = { version = "*", optional = true }
+python = ">=3.8,<4"
+typer = { extras = ["all"], version = "^0.12.5", optional = true }
 
 [tool.poetry.dev-dependencies]
-pre-commit = "^2.1.1"
-pytest = "^7.2.2"
-pytest-cov = "^4.0.0"
-coverage = "^6.1.1"
-codecov = "^2.1.12"
-coveralls = "^3.3.1"
+pytest = "^8.3.2"
+pytest-cov = "^5.0.0"
 
 [tool.poetry.extras]
-cli = ["fire", "pyfiglet"]
+cli = ["typer"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -85,13 +80,13 @@ ignored-argument-names = "args|kwargs|_|__"
 
 [tool.pylint.BASIC]
 good-names = "_,__,i,e,k,v,fn,get,post,put,patch,delete,route,asgi,websocket,Dependency,Body,Parameter,HandlerType,ScopeType,Auth,User"
-no-docstring-rgx="(__.*__|main|test.*|.*test|.*Test|^_.*)$"
+no-docstring-rgx = "(__.*__|main|test.*|.*test|.*Test|^_.*)$"
 
 
 [tool.pylint.LOGGING]
 # Logging modules to check that the string format arguments are in logging
 # function parameter format
-logging-modules=["logging","picologging"]
+logging-modules = ["logging", "picologging"]
 
 
 [tool.coverage.run]
@@ -102,3 +97,6 @@ all = true
 
 [tool.pyright]
 include = ["pyasstosrt", "tests"]
+
+[tool.poetry.scripts]
+pyasstosrt = "pyasstosrt.batch:app"
