@@ -99,4 +99,4 @@ all = true
 include = ["pyasstosrt", "tests"]
 
 [tool.poetry.scripts]
-pyasstosrt = "batch:app"
+pyasstosrt = "pyasstosrt.batch:app"
