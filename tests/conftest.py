@@ -5,7 +5,7 @@ import os
 myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, f'{myPath}/../')
 
-from pyasstosrt import Subtitle
+from pyasstosrt import Subtitle  # noqa: E402
 
 
 @pytest.fixture
