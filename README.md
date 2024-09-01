@@ -57,17 +57,27 @@ sub.export()
 CLI
 ------------
 ```bash
-pyasstosrt --filepath=/Users/user/sub/sub.ass export
+pyasstosrt export /Users/user/sub/sub.ass
 ```
 
 **Optional** You can specify an export folder.
 ```bash
-pyasstosrt --filepath=/Users/user/sub/sub.ass export /Users/user/sub/srt
+pyasstosrt export /Users/user/sub/sub.ass --output-dir /Users/user/sub/srt
 ```
 
-**Optional** If you want to remove effects from text, you can use the --removing_effects flag.
+**Optional** If you want to remove effects from text, you can use the --remove-effects flag.
 ```bash
-pyasstosrt --filepath=/Users/user/sub/sub.ass --removing_effects=True export /Users/user/sub/srt
+pyasstosrt export /Users/user/sub/sub.ass --remove-effects --output-dir /Users/user/sub/srt
+```
+
+**Optional**  If you need to remove duplicates, you can use the --remove-duplicates flag.
+```bash
+pyasstosrt export /Users/user/sub/sub.ass --remove-duplicates
+```
+
+**Optional**  You can use the flags together --remove-duplicates --remove-effects
+```bash
+pyasstosrt export /Users/user/sub/sub.ass --remove-duplicates --remove-effects
 ```
 Installation
 ------------
