@@ -9,10 +9,39 @@ from .dialogue import Dialogue
 
 class Subtitle:
     """
-    Converting ass to srt.
+    Converting ASS (Advanced SubStation Alpha) subtitles to SRT format.
 
-    :type filepath: Path to a file that contains text in Advanced SubStation Alpha format
-    :type removing_effects: Whether to remove effects from the text
+    This class provides functionality to read an ASS subtitle file, convert its contents
+    to SRT format, and export the result either as a file or as a list of dialogues.
+
+    :param filepath: Path to a file that contains text in Advanced SubStation Alpha format
+    :type filepath: Union[str, os.PathLike]
+    :param removing_effects: Whether to remove effects from the text
+    :type removing_effects: bool
+    :param remove_duplicates: Whether to remove and merge consecutive duplicate dialogues
+    :type remove_duplicates: bool
+
+    :raises FileNotFoundError: If the specified file does not exist
+
+    :ivar filepath: The path to the input ASS file
+    :type filepath: AnyStr
+    :ivar file: The stem (filename without extension) of the input file
+    :type file: AnyStr
+    :ivar raw_text: The raw content of the input file
+    :type raw_text: AnyStr
+    :ivar dialogues: List of :class:`~pyasstosrt.dialogue.Dialogue` objects representing the subtitles
+    :type dialogues: List[Dialogue]
+    :ivar removing_effects: Flag indicating whether to remove effects from the text
+    :type removing_effects: bool
+    :ivar is_remove_duplicates: Flag indicating whether to remove and merge consecutive duplicate dialogues
+    :type is_remove_duplicates: bool
+
+    :Example:
+
+    >>> from pyasstosrt import Subtitle
+    >>> sub = Subtitle("path/to/subtitle.ass", removing_effects=True, remove_duplicates=True)
+    >>> sub.convert()
+    >>> sub.export("output/directory", encoding="utf-8")
     """
 
     dialog_mask = re.compile(r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*?,\d+,\d+,\d+,.*?,(.*)")
@@ -33,22 +62,25 @@ class Subtitle:
             self.filepath: AnyStr = filepath
             self.file: AnyStr = Path(filepath).stem
         self.raw_text: AnyStr = self.get_text()
-        self.dialogues: List = []
-        self.removing_effects = removing_effects
-        self.is_remove_duplicates = remove_duplicates
+        self.dialogues: List[Dialogue] = []
+        self.removing_effects: bool = removing_effects
+        self.is_remove_duplicates: bool = remove_duplicates
 
     def get_text(self) -> str:
         """
-        Reads the file and returns the complete contents
-        :return: File contents
+        Reads the file and returns the complete contents.
+
+        :return: File contents as a string
+        :rtype: str
         """
         return Path(self.filepath).read_text(encoding="utf8")
 
     def convert(self):
         """
-        Convert the format ass subtitles to srt.
+        Convert the ASS subtitles to SRT format.
 
-        :return:
+        This method processes the raw text, applies any necessary filters (like removing effects),
+        and prepares the dialogues for formatting.
         """
         cleaning_old_format = re.compile(r"{.*?}")
         dialogs = re.findall(self.dialog_mask, re.sub(cleaning_old_format, "", self.raw_text))
@@ -61,23 +93,26 @@ class Subtitle:
     @staticmethod
     def text_clearing(raw_text: str) -> str:
         """
-        We're clearing the text from unnecessary tags.
+        Clear the text from unnecessary tags and format line breaks.
 
-        :param raw_text: Dialog text with whitespace characters
-        :return: Dialog text without whitespaces and with the right move to a new line
+        :param raw_text: Dialog text with whitespace characters and ASS format tags
+        :type raw_text: str
+        :return: Cleaned dialog text without whitespaces and with proper line breaks
+        :rtype: str
         """
-
         text = raw_text.replace(r"\h", "\xa0").strip()
         line_text = text.split(r"\N")
         return "\n".join(item.strip() for item in line_text).strip()
 
     @staticmethod
-    def merged_dialogues(dialogues: List) -> List[Tuple[str, str, str]]:
+    def merged_dialogues(dialogues: List[Tuple[str, str, str]]) -> List[Tuple[str, str, str]]:
         """
         Group consecutive dialogues with the same text into a single dialogue with a merged time range.
 
-        :return: A generator that iterates over the input dialogues and groups consecutive dialogues
-            with the same text into a single dialogue with a merged time range.
+        :param dialogues: List of dialogue tuples (start_time, end_time, text)
+        :type dialogues: List[Tuple[str, str, str]]
+        :return: Generator yielding merged dialogues
+        :rtype: List[Tuple[str, str, str]]
         """
         curr_dialogue = None
         for start, end, text in dialogues:
@@ -91,20 +126,26 @@ class Subtitle:
         if curr_dialogue is not None:
             yield curr_dialogue
 
-    def remove_duplicates(self, dialogues: List):
+    def remove_duplicates(self, dialogues: List[Tuple[str, str, str]]) -> List[Tuple[str, str, str]]:
         """
         Remove consecutive duplicate dialogues in the given list and merge their time ranges.
+
         :param dialogues: A list of dialogues, where each dialogue is a tuple (start, end, text)
+        :type dialogues: List[Tuple[str, str, str]]
         :return: A list of dialogues with consecutive duplicates removed and time ranges merged
+        :rtype: List[Tuple[str, str, str]]
         """
         return list(self.merged_dialogues(dialogues))
 
-    def subtitle_formatting(self, dialogues: List):
+    def subtitle_formatting(self, dialogues: List[Tuple[str, str, str]]):
         """
-        Formatting ass into srt.
+        Format ASS dialogues into SRT format.
 
-        :param dialogues: Prepared dialogues
-        :return: Prepared dialogue sheet
+        This method processes the dialogues, removes duplicates if necessary, and creates
+        :class:`~pyasstosrt.dialogue.Dialogue` objects for each subtitle entry.
+
+        :param dialogues: Prepared dialogues as tuples (start_time, end_time, text)
+        :type dialogues: List[Tuple[str, str, str]]
         """
         cleaned_dialogues = self.remove_duplicates(dialogues) if self.is_remove_duplicates else dialogues
 
@@ -115,17 +156,23 @@ class Subtitle:
             self.dialogues.append(dialogue)
 
     def export(
-        self, output_dir: AnyStr = None, encoding: AnyStr = "utf8", output_dialogues: bool = False
-    ) -> Optional[List]:
+        self, output_dir: Optional[AnyStr] = None, encoding: AnyStr = "utf8", output_dialogues: bool = False
+    ) -> Optional[List[Dialogue]]:
         """
-        If ret_dialogues parameter is False exports the subtitles to a file.
+        Export the subtitles either to a file or as a list of dialogues.
 
-        :param output_dir: Export path SubRip file
-        :param encoding: In which encoding you should save the file
-        :param output_dialogues: Whereas it should return a list of dialogues not creating a SubRip file
-        :return: List of dialogues
+        If `output_dialogues` is False, this method exports the subtitles to an SRT file.
+        Otherwise, it returns a list of :class:`~pyasstosrt.dialogue.Dialogue` objects.
+
+        :param output_dir: Export path for the SRT file (optional)
+        :type output_dir: Optional[AnyStr]
+        :param encoding: Encoding to use when saving the file (default is UTF-8)
+        :type encoding: AnyStr
+        :param output_dialogues: Whether to return a list of dialogues instead of creating an SRT file
+        :type output_dialogues: bool
+        :return: List of :class:`~pyasstosrt.dialogue.Dialogue` objects if `output_dialogues` is True, otherwise None
+        :rtype: Optional[List[Dialogue]]
         """
-
         self.convert()
 
         if output_dialogues:
