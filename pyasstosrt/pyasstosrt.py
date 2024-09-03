@@ -1,8 +1,7 @@
 import os
 import re
-from os.path import isfile
 from pathlib import Path
-from typing import AnyStr, List, Optional, Tuple, Union
+from typing import List, Optional, Tuple, Union
 
 from .dialogue import Dialogue
 
@@ -24,11 +23,11 @@ class Subtitle:
     :raises FileNotFoundError: If the specified file does not exist
 
     :ivar filepath: The path to the input ASS file
-    :type filepath: AnyStr
+    :type filepath: Path
     :ivar file: The stem (filename without extension) of the input file
-    :type file: AnyStr
+    :type file: str
     :ivar raw_text: The raw content of the input file
-    :type raw_text: AnyStr
+    :type raw_text: str
     :ivar dialogues: List of :class:`~pyasstosrt.dialogue.Dialogue` objects representing the subtitles
     :type dialogues: List[Dialogue]
     :ivar removing_effects: Flag indicating whether to remove effects from the text
@@ -44,7 +43,9 @@ class Subtitle:
     >>> sub.export("output/directory", encoding="utf-8")
     """
 
-    dialog_mask = re.compile(r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*?,\d+,\d+,\d+,.*?,(.*)")
+    dialog_mask = re.compile(
+        r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*?,\d+,\d+,\d+,.*?,(.*)"
+    )
     effects = re.compile(r"(\s?[ml].+?(-?\d+(\.\d+)?).+?(-?\d+(\.\d+)?).+)")
 
     def __init__(
@@ -53,15 +54,11 @@ class Subtitle:
         removing_effects: bool = False,
         remove_duplicates: bool = False,
     ):
-        if not isfile(filepath):
-            raise FileNotFoundError(f'"{filepath}" does not exist')
-        if isinstance(filepath, os.PathLike):
-            self.filepath: AnyStr = str(filepath)
-            self.file: AnyStr = filepath.stem
-        elif isinstance(filepath, str):
-            self.filepath: AnyStr = filepath
-            self.file: AnyStr = Path(filepath).stem
-        self.raw_text: AnyStr = self.get_text()
+        self.filepath = Path(filepath)
+        if not self.filepath.is_file():
+            raise FileNotFoundError(f'"{self.filepath}" does not exist')
+        self.file: str = self.filepath.stem
+        self.raw_text: str = self.get_text()
         self.dialogues: List[Dialogue] = []
         self.removing_effects: bool = removing_effects
         self.is_remove_duplicates: bool = remove_duplicates
@@ -73,7 +70,7 @@ class Subtitle:
         :return: File contents as a string
         :rtype: str
         """
-        return Path(self.filepath).read_text(encoding="utf8")
+        return self.filepath.read_text(encoding="utf8")
 
     def convert(self):
         """
@@ -83,7 +80,9 @@ class Subtitle:
         and prepares the dialogues for formatting.
         """
         cleaning_old_format = re.compile(r"{.*?}")
-        dialogs = re.findall(self.dialog_mask, re.sub(cleaning_old_format, "", self.raw_text))
+        dialogs = re.findall(
+            self.dialog_mask, re.sub(cleaning_old_format, "", self.raw_text)
+        )
         if self.removing_effects:
             dialogs = filter(lambda x: re.sub(self.effects, "", x[2]), dialogs)
         dialogs = sorted(list(filter(lambda x: x[2], dialogs)))
@@ -105,7 +104,9 @@ class Subtitle:
         return "\n".join(item.strip() for item in line_text).strip()
 
     @staticmethod
-    def merged_dialogues(dialogues: List[Tuple[str, str, str]]) -> List[Tuple[str, str, str]]:
+    def merged_dialogues(
+        dialogues: List[Tuple[str, str, str]],
+    ) -> List[Tuple[str, str, str]]:
         """
         Group consecutive dialogues with the same text into a single dialogue with a merged time range.
 
@@ -126,7 +127,9 @@ class Subtitle:
         if curr_dialogue is not None:
             yield curr_dialogue
 
-    def remove_duplicates(self, dialogues: List[Tuple[str, str, str]]) -> List[Tuple[str, str, str]]:
+    def remove_duplicates(
+        self, dialogues: List[Tuple[str, str, str]]
+    ) -> List[Tuple[str, str, str]]:
         """
         Remove consecutive duplicate dialogues in the given list and merge their time ranges.
 
@@ -147,7 +150,11 @@ class Subtitle:
         :param dialogues: Prepared dialogues as tuples (start_time, end_time, text)
         :type dialogues: List[Tuple[str, str, str]]
         """
-        cleaned_dialogues = self.remove_duplicates(dialogues) if self.is_remove_duplicates else dialogues
+        cleaned_dialogues = (
+            self.remove_duplicates(dialogues)
+            if self.is_remove_duplicates
+            else dialogues
+        )
 
         for index, values in enumerate(cleaned_dialogues, start=1):
             start, end, text = values
@@ -156,7 +163,10 @@ class Subtitle:
             self.dialogues.append(dialogue)
 
     def export(
-        self, output_dir: Optional[AnyStr] = None, encoding: AnyStr = "utf8", output_dialogues: bool = False
+        self,
+        output_dir: Optional[Union[str, os.PathLike]] = None,
+        encoding: str = "utf8",
+        output_dialogues: bool = False,
     ) -> Optional[List[Dialogue]]:
         """
         Export the subtitles either to a file or as a list of dialogues.
@@ -165,9 +175,9 @@ class Subtitle:
         Otherwise, it returns a list of :class:`~pyasstosrt.dialogue.Dialogue` objects.
 
         :param output_dir: Export path for the SRT file (optional)
-        :type output_dir: Optional[AnyStr]
+        :type output_dir: Optional[Union[str, os.PathLike]]
         :param encoding: Encoding to use when saving the file (default is UTF-8)
-        :type encoding: AnyStr
+        :type encoding: str
         :param output_dialogues: Whether to return a list of dialogues instead of creating an SRT file
         :type output_dialogues: bool
         :return: List of :class:`~pyasstosrt.dialogue.Dialogue` objects if `output_dialogues` is True, otherwise None
@@ -178,13 +188,13 @@ class Subtitle:
         if output_dialogues:
             return self.dialogues
 
-        path = Path(self.filepath)
         file = f"{self.file}.srt"
         if output_dir:
-            Path(output_dir).mkdir(parents=True, exist_ok=True)
-            out_path = os.path.join(output_dir, file)
+            out_path = Path(output_dir)
+            out_path.mkdir(parents=True, exist_ok=True)
+            out_path = out_path / file
         else:
-            out_path = os.path.join(path.parent, file)
+            out_path = self.filepath.parent / file
         with open(out_path, encoding=encoding, mode="w") as writer:
             for dialogue in self.dialogues:
                 writer.write(str(dialogue))
