@@ -494,9 +494,6 @@ wheels = [
 name = "pyasstosrt"
 version = "1.4.1"
 source = { editable = "." }
-dependencies = [
-    { name = "typer" },
-]
 
 [package.optional-dependencies]
 cli = [
@@ -516,10 +513,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "typer", extras = ["all"], specifier = ">=0.15.2" },
-    { name = "typer", extras = ["all"], marker = "extra == 'cli'", specifier = ">=0.15.2" },
-]
+requires-dist = [{ name = "typer", marker = "extra == 'cli'", specifier = ">=0.15.2" }]
 provides-extras = ["cli"]
 
 [package.metadata.requires-dev]

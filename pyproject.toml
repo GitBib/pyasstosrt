@@ -23,12 +23,9 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: PyPy",
     "Programming Language :: Python :: Implementation :: CPython",
 ]
-dependencies = [
-    "typer[all]>=0.15.2",
-]
 
 [project.optional-dependencies]
-cli = ["typer[all]>=0.15.2"]
+cli = ["typer>=0.15.2"]
 
 [project.urls]
 Homepage = "https://github.com/GitBib/pyasstosrt"
