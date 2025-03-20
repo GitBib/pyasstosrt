@@ -17,12 +17,13 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.abspath("../.."))
 
+
 # Read version from pyproject.toml
 def get_version_from_pyproject():
     pyproject_path = os.path.join(os.path.abspath("../.."), "pyproject.toml")
     if not os.path.exists(pyproject_path):
         return "unknown"
-    
+
     with open(pyproject_path, "rb") as f:
         try:
             pyproject_data = tomli.load(f)

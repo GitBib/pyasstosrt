@@ -11,28 +11,28 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@v4
-      
+
     - name: Get the tag name for the release
       id: vars
       shell: bash
       run: |
         tag="${GITHUB_REF#refs/*/}" # refs/tags/1.2.3 -> 1.2.3
         echo "tag=$tag" >> $GITHUB_OUTPUT
-        
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
-        
+
     - name: Install uv
       uses: astral-sh/setup-uv@v5
       with:
         version: latest
         python-version: '3.12'
-        
+
     - name: Install project
       run: uv sync --all-extras
-      
+
     - name: Build and publish
       shell: bash
       run: |

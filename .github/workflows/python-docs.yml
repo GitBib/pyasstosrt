@@ -13,30 +13,30 @@ permissions:
 jobs:
   docs:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Check out repository
       uses: actions/checkout@v4
-      
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
-        
+
     - name: Install uv
       uses: astral-sh/setup-uv@v5
       with:
         version: latest
         python-version: '3.12'
         enable-cache: true
-        
+
     - name: Install project dependencies
       run: uv sync --all-extras --dev
-      
+
     - name: Build documentation
       run: |
         uv run sphinx-build -b html docs/source docs/build/html
-        
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch' }}

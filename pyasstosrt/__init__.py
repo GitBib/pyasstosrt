@@ -4,6 +4,7 @@
 :license: Apache License, Version 2.0, see LICENSE file
 :copyright: (c) 2021 GitBib
 """
+
 from .dialogue import Dialogue
 from .pyasstosrt import Subtitle
 from .time import Time

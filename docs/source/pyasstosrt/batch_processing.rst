@@ -63,7 +63,7 @@ Advanced Batch Processing
     def process_file(file_path, remove_effects=False, remove_duplicates=False):
         try:
             sub = Subtitle(
-                file_path, 
+                file_path,
                 removing_effects=remove_effects,
                 remove_duplicates=remove_duplicates
             )
@@ -86,15 +86,15 @@ Advanced Batch Processing
     def batch_process(directory, max_workers=4):
         ass_files = get_all_ass_files(directory)
         os.makedirs("./output", exist_ok=True)
-        
+
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             results = list(executor.map(
-                process_file, 
+                process_file,
                 ass_files,
                 [True] * len(ass_files),  # remove_effects=True for all files
                 [True] * len(ass_files)   # remove_duplicates=True for all files
             ))
-        
+
         for result in results:
             print(result)
 
@@ -112,10 +112,10 @@ Custom Processing Logic
     def custom_process(file_path, output_dir):
         # Read ASS file
         sub = Subtitle(file_path)
-        
+
         # Perform conversion
         sub.convert()
-        
+
         # Custom processing - filter dialogues
         filtered_dialogues = []
         for dialogue in sub.dialogues:
@@ -123,10 +123,10 @@ Custom Processing Logic
             duration = dialogue.end - dialogue.start
             if duration > 2.0:
                 filtered_dialogues.append(dialogue)
-        
+
         # Replace original dialogues with filtered ones
         sub.dialogues = filtered_dialogues
-        
+
         # Export the result
         sub.export(output_dir=output_dir)
 
@@ -144,4 +144,4 @@ Tips and Best Practices
 
 4. **Performance**: Use parallel processing for large batches, but be mindful of system resources.
 
-5. **Validation**: Consider adding validation of the converted SRT files to ensure they meet your requirements. 
+5. **Validation**: Consider adding validation of the converted SRT files to ensure they meet your requirements.

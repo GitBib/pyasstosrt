@@ -143,7 +143,7 @@ Slow Batch Processing
 .. code-block:: python
 
     from concurrent.futures import ThreadPoolExecutor
-    
+
     # Process files in parallel
     with ThreadPoolExecutor(max_workers=4) as executor:
         executor.map(process_file_function, file_list)
@@ -159,15 +159,15 @@ When troubleshooting, it's often helpful to add print statements to see what's h
 .. code-block:: python
 
     sub = Subtitle("file.ass")
-    
+
     # Print raw text from the file
     print(sub.raw_text[:500])  # First 500 chars
-    
+
     # Print found dialogues after conversion
     sub.convert()
     print(f"Found {len(sub.dialogues)} dialogues")
-    
-    # Print the first dialogue 
+
+    # Print the first dialogue
     if sub.dialogues:
         print(f"First dialogue: {sub.dialogues[0]}")
 
@@ -178,4 +178,4 @@ If you encounter an issue not covered in this guide:
 
 1. Check the project's GitHub repository for open and closed issues
 2. Open a new issue on GitHub with details of your problem
-3. Include sample code and if possible, a sample ASS file to reproduce the issue 
+3. Include sample code and if possible, a sample ASS file to reproduce the issue
