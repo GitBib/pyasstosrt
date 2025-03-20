@@ -35,10 +35,6 @@ jobs:
       
     - name: Build documentation
       run: |
-        # Create docs directory if it doesn't exist
-        mkdir -p docs/source docs/build
-        
-        # Build documentation with Sphinx
         uv run sphinx-build -b html docs/source docs/build/html
         
     - name: Deploy to GitHub Pages
@@ -47,4 +43,4 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs/build/html
-        force_orphan: true 
+        force_orphan: true
