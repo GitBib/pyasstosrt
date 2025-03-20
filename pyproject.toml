@@ -1,44 +1,66 @@
-[tool.poetry]
+[project]
 name = "pyasstosrt"
 version = "1.4.1"
 description = "Convert ASS subtitle to SRT format"
-authors = ["GitBib <me@bnff.website>"]
-license = "Apache License, Version 2.0, see LICENSE file"
+authors = [{ name = "GitBib", email = "me@bnff.website" }]
+requires-python = ">=3.8"
 readme = "README.md"
-homepage = "https://github.com/GitBib/pyasstosrt"
-repository = "https://github.com/GitBib/pyasstosrt"
-keywords = ["ASS subtitle", "SRT", "Convert"]
+license = { text = "Apache License, Version 2.0" }
+keywords = [
+    "ASS subtitle",
+    "SRT",
+    "Convert",
+]
 classifiers = [
-    'License :: OSI Approved :: Apache Software License',
-    'Operating System :: OS Independent',
-    'Programming Language :: Python',
-    'Programming Language :: Python :: 3.8',
-    'Programming Language :: Python :: 3.9',
-    'Programming Language :: Python :: 3.10',
-    'Programming Language :: Python :: 3.11',
-    'Programming Language :: Python :: 3.12',
-    'Programming Language :: Python :: 3.13',
-    'Programming Language :: Python :: Implementation :: PyPy',
-    'Programming Language :: Python :: Implementation :: CPython',
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Programming Language :: Python :: Implementation :: CPython",
 ]
-packages = [
-    { include = "pyasstosrt" },
+dependencies = [
+    "typer[all]>=0.15.2",
 ]
 
-[tool.poetry.dependencies]
-python = ">=3.8,<4"
-typer = { extras = ["all"], version = "^0.12.5", optional = true }
+[project.optional-dependencies]
+cli = ["typer[all]>=0.15.2"]
 
-[tool.poetry.dev-dependencies]
-pytest = "^8.3.2"
-pytest-cov = "^5.0.0"
+[project.urls]
+Homepage = "https://github.com/GitBib/pyasstosrt"
+Repository = "https://github.com/GitBib/pyasstosrt"
 
-[tool.poetry.extras]
-cli = ["typer"]
+[project.scripts]
+pyasstosrt = "pyasstosrt.batch:app"
+
+[dependency-groups]
+dev = [
+    "pytest>=7.0.0,<8.0.0 ; python_version < '3.12'",
+    "pytest>=8.3.5 ; python_version >= '3.12'",
+    "pytest-cov>=4.1.0,<5.0.0 ; python_version < '3.12'",
+    "pytest-cov>=5.0.0 ; python_version >= '3.12'",
+    "ruff>=0.11.1",
+    "Sphinx>=8.0.2 ; python_version >= '3.12'",
+    "sphinx-immaterial>=0.13.4 ; python_version >= '3.12'",
+    "tomli>=2.2.1",
+]
+
+[tool.hatch.build.targets.sdist]
+include = ["pyasstosrt"]
+
+[tool.hatch.build.targets.wheel]
+include = ["pyasstosrt"]
+
+[tool.pdm.build]
+includes = ["pyasstosrt"]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
 
 [tool.black]
 line-length = 120
@@ -82,12 +104,10 @@ ignored-argument-names = "args|kwargs|_|__"
 good-names = "_,__,i,e,k,v,fn,get,post,put,patch,delete,route,asgi,websocket,Dependency,Body,Parameter,HandlerType,ScopeType,Auth,User"
 no-docstring-rgx = "(__.*__|main|test.*|.*test|.*Test|^_.*)$"
 
-
 [tool.pylint.LOGGING]
 # Logging modules to check that the string format arguments are in logging
 # function parameter format
 logging-modules = ["logging", "picologging"]
-
 
 [tool.coverage.run]
 omit = ["*/tests/*"]
@@ -97,6 +117,3 @@ all = true
 
 [tool.pyright]
 include = ["pyasstosrt", "tests"]
-
-[tool.poetry.scripts]
-pyasstosrt = "pyasstosrt.batch:app"
