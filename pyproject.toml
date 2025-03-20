@@ -51,12 +51,15 @@ dev = [
 
 [tool.hatch.build.targets.sdist]
 include = ["pyasstosrt"]
+exclude = ["tests", "tests/*"]
 
 [tool.hatch.build.targets.wheel]
 include = ["pyasstosrt"]
+exclude = ["tests", "tests/*"]
 
 [tool.pdm.build]
 includes = ["pyasstosrt"]
+excludes = ["tests", "tests/*"]
 
 [build-system]
 requires = ["pdm-backend"]
