@@ -125,4 +125,4 @@ You can combine multiple options:
 
 .. code-block:: bash
 
-    pyasstosrt export subtitle.ass --remove-effects --remove-duplicates --output-dir ./output 
+    pyasstosrt export subtitle.ass --remove-effects --remove-duplicates --output-dir ./output
