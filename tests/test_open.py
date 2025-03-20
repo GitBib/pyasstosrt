@@ -23,7 +23,7 @@ def test_open_use_pathlib():
     ('tests/sub1.ass', FileNotFoundError),
 ])
 def test_open_errors(file_path, expected_error):
-    if expected_error == TypeError:
+    if expected_error is TypeError:
         with open(file_path, 'r') as file:
             with pytest.raises(expected_error):
                 Subtitle(file)
