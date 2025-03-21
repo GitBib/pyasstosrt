@@ -65,5 +65,5 @@ def output_dir(tmp_path):
 def invalid_ass_file(tmp_path):
     invalid_file = tmp_path / "invalid.ass"
     content = "This is not a valid ASS file"
-    invalid_file.write_text(content)
+    invalid_file.write_text(content, encoding="utf-8")
     return invalid_file, content
