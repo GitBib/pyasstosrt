@@ -24,12 +24,15 @@ def test_millisecond_sub():
     assert sub == 0.02
 
 
-@pytest.mark.parametrize("input_time, expected_output", [
-    ("0:00:00.00", "00:00:00,000"),
-    ("0:01:00.00", "00:01:00,000"),
-    ("1:23:45.67", "01:23:45,670"),
-    ("12:34:56.78", "12:34:56,780"),
-])
+@pytest.mark.parametrize(
+    "input_time, expected_output",
+    [
+        ("0:00:00.00", "00:00:00,000"),
+        ("0:01:00.00", "00:01:00,000"),
+        ("1:23:45.67", "01:23:45,670"),
+        ("12:34:56.78", "12:34:56,780"),
+    ],
+)
 def test_str_conversion(input_time, expected_output):
     t = Time(input_time)
     assert str(t) == expected_output

@@ -42,6 +42,7 @@ cli = ["typer>=0.15.2"]
 [project.urls]
 Homepage = "https://github.com/GitBib/pyasstosrt"
 Repository = "https://github.com/GitBib/pyasstosrt"
+Documentation = "https://gitbib.github.io/pyasstosrt/"
 
 [project.scripts]
 pyasstosrt = "pyasstosrt.batch:app"
@@ -129,3 +130,24 @@ all = true
 
 [tool.pyright]
 include = ["pyasstosrt", "tests"]
+
+[tool.ruff]
+target-version = "py38"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "I"]
+ignore = ["B008"]
+exclude = [
+    ".git",
+    ".ruff_cache",
+    "__pycache__",
+    "build",
+    "dist",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["pyasstosrt"]
+
+[tool.ruff.format]
+quote-style = "double"

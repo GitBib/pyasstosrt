@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Optional, List
+from typing import List, Optional
 
 try:
     import typer
@@ -45,12 +45,8 @@ def export(
         dir_okay=False,
         readable=True,
     ),
-    removing_effects: bool = typer.Option(
-        False, "--remove-effects", "-r", help="Remove effects from subtitles"
-    ),
-    remove_duplicates: bool = typer.Option(
-        False, "--remove-duplicates", "-d", help="Remove duplicate subtitles"
-    ),
+    removing_effects: bool = typer.Option(False, "--remove-effects", "-r", help="Remove effects from subtitles"),
+    remove_duplicates: bool = typer.Option(False, "--remove-duplicates", "-d", help="Remove duplicate subtitles"),
     output_dir: Optional[Path] = typer.Option(
         None,
         "--output-dir",
@@ -60,12 +56,8 @@ def export(
         dir_okay=True,
         writable=True,
     ),
-    encoding: str = typer.Option(
-        "utf8", "--encoding", "-e", help="Encoding for the output file"
-    ),
-    output_dialogues: bool = typer.Option(
-        False, "--output-dialogues", "-p", help="Print dialogues to console"
-    ),
+    encoding: str = typer.Option("utf8", "--encoding", "-e", help="Encoding for the output file"),
+    output_dialogues: bool = typer.Option(False, "--output-dialogues", "-p", help="Print dialogues to console"),
 ):
     """Convert ASS subtitle file(s) to SRT format"""
     with Progress() as progress:
@@ -79,20 +71,12 @@ def export(
                 result = sub.export(output_dir, encoding, output_dialogues)
 
                 if output_dialogues:
-                    progress.console.print(
-                        Panel(f"Dialogues for {file.name}:", expand=False)
-                    )
+                    progress.console.print(Panel(f"Dialogues for {file.name}:", expand=False))
                     for dialogue in result:
                         progress.console.print(str(dialogue))
 
-                output_file = (
-                    Path(output_dir) / f"{file.stem}.srt"
-                    if output_dir
-                    else file.with_suffix(".srt")
-                )
-                progress.console.print(
-                    f"[green]Success:[/green] Converted {file.name} to {output_file}"
-                )
+                output_file = Path(output_dir) / f"{file.stem}.srt" if output_dir else file.with_suffix(".srt")
+                progress.console.print(f"[green]Success:[/green] Converted {file.name} to {output_file}")
             except Exception as e:
                 progress.console.print(
                     f"[red]Error:[/red] Failed to convert {file.name}. {str(e)}",
