@@ -43,9 +43,7 @@ class Subtitle:
     >>> sub.export("output/directory", encoding="utf-8")
     """
 
-    dialog_mask = re.compile(
-        r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*?,\d+,\d+,\d+,.*?,(.*)"
-    )
+    dialog_mask = re.compile(r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*?,\d+,\d+,\d+,.*?,(.*)")
     effects = re.compile(r"(\s?[ml].+?(-?\d+(\.\d+)?).+?(-?\d+(\.\d+)?).+)")
 
     def __init__(
@@ -80,9 +78,7 @@ class Subtitle:
         and prepares the dialogues for formatting.
         """
         cleaning_old_format = re.compile(r"{.*?}")
-        dialogs = re.findall(
-            self.dialog_mask, re.sub(cleaning_old_format, "", self.raw_text)
-        )
+        dialogs = re.findall(self.dialog_mask, re.sub(cleaning_old_format, "", self.raw_text))
         if self.removing_effects:
             dialogs = filter(lambda x: re.sub(self.effects, "", x[2]), dialogs)
         dialogs = sorted(list(filter(lambda x: x[2], dialogs)))
@@ -127,9 +123,7 @@ class Subtitle:
         if curr_dialogue is not None:
             yield curr_dialogue
 
-    def remove_duplicates(
-        self, dialogues: List[Tuple[str, str, str]]
-    ) -> List[Tuple[str, str, str]]:
+    def remove_duplicates(self, dialogues: List[Tuple[str, str, str]]) -> List[Tuple[str, str, str]]:
         """
         Remove consecutive duplicate dialogues in the given list and merge their time ranges.
 
@@ -150,11 +144,7 @@ class Subtitle:
         :param dialogues: Prepared dialogues as tuples (start_time, end_time, text)
         :type dialogues: List[Tuple[str, str, str]]
         """
-        cleaned_dialogues = (
-            self.remove_duplicates(dialogues)
-            if self.is_remove_duplicates
-            else dialogues
-        )
+        cleaned_dialogues = self.remove_duplicates(dialogues) if self.is_remove_duplicates else dialogues
 
         for index, values in enumerate(cleaned_dialogues, start=1):
             start, end, text = values

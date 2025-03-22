@@ -23,127 +23,127 @@ def test_export_file_not_exists(cli_runner):
 
 
 def test_export_with_existing_ass_file(cli_runner, test_files, cleanup_srt_files):
-    test_file = test_files['sub']
+    test_file = test_files["sub"]
     assert test_file.exists(), f"Test file {test_file} not found"
-    
+
     srt_file = test_file.with_suffix(".srt")
-    
+
     result = cli_runner.invoke(app, ["export", str(test_file)])
     assert result.exit_code == 0
     assert "Success: Converted sub.ass to" in result.stdout
     assert srt_file.exists()
-    
+
     srt_content = srt_file.read_text(encoding="utf-8")
     assert "1" in srt_content
     assert "It's time for the main event!" in srt_content
 
 
 def test_export_with_output_dir(cli_runner, test_files, output_dir):
-    test_file = test_files['sub']
-    
+    test_file = test_files["sub"]
+
     result = cli_runner.invoke(app, ["export", str(test_file), "--output-dir", str(output_dir)])
     assert result.exit_code == 0
     expected_output = output_dir / "sub.srt"
     assert expected_output.exists()
-    
+
     if expected_output.exists():
         expected_output.unlink()
 
 
 def test_export_with_remove_effects(cli_runner, test_files, cleanup_srt_files):
-    test_file = test_files['sub']
+    test_file = test_files["sub"]
     srt_file = test_file.with_suffix(".srt")
-    
+
     result = cli_runner.invoke(app, ["export", str(test_file), "--remove-effects"])
     assert result.exit_code == 0
     assert srt_file.exists()
-    
+
     srt_content = srt_file.read_text(encoding="utf-8")
     assert "It's time for the main event!" in srt_content
 
 
 def test_export_with_specialized_effects_removal(cli_runner, test_files, cleanup_srt_files):
-    test_file = test_files['sub_removing_effects']
-    standard_srt = test_files['sub_standard_removing_effects']
-    
+    test_file = test_files["sub_removing_effects"]
+    standard_srt = test_files["sub_standard_removing_effects"]
+
     assert test_file.exists(), f"Test file {test_file} not found"
     assert standard_srt.exists(), f"Standard SRT file {standard_srt} not found"
-    
+
     srt_file = test_file.with_suffix(".srt")
-    
+
     result = cli_runner.invoke(app, ["export", str(test_file), "--remove-effects"])
     assert result.exit_code == 0
     assert srt_file.exists()
-    
+
     generated_content = srt_file.read_text(encoding="utf-8")
-    
+
     assert len(generated_content) > 0
 
 
 def test_export_with_remove_duplicates(cli_runner, test_files, cleanup_srt_files):
-    test_file = test_files['sub']
+    test_file = test_files["sub"]
     srt_file = test_file.with_suffix(".srt")
-    
+
     result = cli_runner.invoke(app, ["export", str(test_file), "--remove-duplicates"])
     assert result.exit_code == 0
     assert srt_file.exists()
 
 
 def test_export_with_output_dialogues(cli_runner, test_files, cleanup_srt_files):
-    test_file = test_files['sub']
-    
+    test_file = test_files["sub"]
+
     result = cli_runner.invoke(app, ["export", str(test_file), "--output-dialogues"])
     assert result.exit_code == 0
-    
+
     assert "Dialogues for sub.ass:" in result.stdout
     assert "It's time for the main event!" in result.stdout
 
 
 def test_export_with_custom_encoding(cli_runner, test_files, cleanup_srt_files):
-    test_file = test_files['sub']
+    test_file = test_files["sub"]
     srt_file = test_file.with_suffix(".srt")
-    
+
     result = cli_runner.invoke(app, ["export", str(test_file), "--encoding", "utf-8"])
     assert result.exit_code == 0
     assert srt_file.exists()
 
 
 def test_export_standard_srt_comparison(cli_runner, test_files, cleanup_srt_files):
-    test_file = test_files['sub']
-    standard_srt = test_files['sub_standard']
-    
+    test_file = test_files["sub"]
+    standard_srt = test_files["sub_standard"]
+
     assert test_file.exists(), f"Test file {test_file} not found"
     assert standard_srt.exists(), f"Standard SRT file {standard_srt} not found"
-    
+
     srt_file = test_file.with_suffix(".srt")
-    
+
     result = cli_runner.invoke(app, ["export", str(test_file)])
     assert result.exit_code == 0
     assert srt_file.exists()
-    
+
     generated_content = srt_file.read_text(encoding="utf-8")
-    
+
     assert len(generated_content) > 0
 
 
 def test_export_multiple_files(cli_runner, test_files, cleanup_srt_files):
-    file1 = test_files['sub']
-    file2 = test_files['sub_removing_effects']
-    
+    file1 = test_files["sub"]
+    file2 = test_files["sub_removing_effects"]
+
     assert file1.exists(), f"Test file {file1} not found"
     assert file2.exists(), f"Test file {file2} not found"
-    
+
     srt_file1 = file1.with_suffix(".srt")
     srt_file2 = file2.with_suffix(".srt")
-    
+
     result = cli_runner.invoke(app, ["export", str(file1), str(file2)])
     assert result.exit_code == 0
-    
+
     assert f"Processing: {file1.name}" in result.stdout
     assert f"Processing: {file2.name}" in result.stdout
     assert f"Success: Converted {file1.name}" in result.stdout
     assert f"Success: Converted {file2.name}" in result.stdout
-    
+
     assert srt_file1.exists()
     assert srt_file2.exists()
 
@@ -154,26 +154,26 @@ def test_simple_text_file_conversion(cli_runner, invalid_ass_file):
     result = cli_runner.invoke(app, ["export", str(invalid_file)])
     assert result.exit_code == 0
     assert f"Success: Converted {invalid_file.name}" in result.stdout
-    
+
     srt_file = invalid_file.with_suffix(".srt")
     assert srt_file.exists()
-    
+
     if srt_file.exists():
         srt_file.unlink()
 
 
 def test_export_with_subtitle_exception(cli_runner, test_files, monkeypatch):
-    test_file = test_files['sub']
-    
+    test_file = test_files["sub"]
+
     from pyasstosrt import Subtitle as OriginalSubtitle
-    
+
     def mock_init(*args, **kwargs):
         raise ValueError("Test error")
-    
+
     monkeypatch.setattr(OriginalSubtitle, "__init__", mock_init)
-    
+
     result = cli_runner.invoke(app, ["export", str(test_file)])
-    
+
     assert result.exit_code == 0
     assert "Error:" in result.stdout
     assert f"Failed to convert {test_file.name}" in result.stdout
@@ -183,8 +183,5 @@ def test_export_with_subtitle_exception(cli_runner, test_files, monkeypatch):
 def test_main_entry_point():
     with unittest.mock.patch("pyasstosrt.batch.__name__", "__main__"):
         with unittest.mock.patch("pyasstosrt.batch.app"):
-            with open(sys.modules['pyasstosrt.batch'].__file__, encoding="utf-8") as f:
-                content = f.read()
-                
-            if "if __name__ == '__main__':" in content and "app()" in content:
-                assert True, "Entry point exists and calls app()"
+            with open(sys.modules["pyasstosrt.batch"].__file__, encoding="utf-8") as f:
+                f.read()
