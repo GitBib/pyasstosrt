@@ -23,9 +23,7 @@ jobs:
       with:
         version: latest
         python-version: ${{ matrix.python-version }}
-        cache-suffix: ${{ matrix.python-version }}
         enable-cache: true
-        cache-dependency-glob: "pyproject.toml"
 
     - name: Install dependencies
       run: |
