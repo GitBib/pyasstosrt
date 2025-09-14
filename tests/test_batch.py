@@ -19,7 +19,7 @@ def test_export_help(cli_runner):
 def test_export_file_not_exists(cli_runner):
     result = cli_runner.invoke(app, ["export", "nonexistent_file.ass"])
     assert result.exit_code != 0
-    assert "nonexistent_file.ass" in result.stdout
+    assert "nonexistent_file.ass" in result.stderr
 
 
 def test_export_with_existing_ass_file(cli_runner, test_files, cleanup_srt_files):
