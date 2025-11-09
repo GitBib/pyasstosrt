@@ -32,12 +32,13 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Programming Language :: Python :: Implementation :: CPython",
 ]
 
 [project.optional-dependencies]
-cli = ["typer>=0.17.4"]
+cli = ["typer>=0.20.0"]
 
 [project.urls]
 Homepage = "https://github.com/GitBib/pyasstosrt"
@@ -50,13 +51,13 @@ pyasstosrt = "pyasstosrt.batch:app"
 [dependency-groups]
 dev = [
     "pytest>=7.0.0,<8.0.0 ; python_version < '3.12'",
-    "pytest>=8.4.2 ; python_version >= '3.12'",
+    "pytest>=9.0.0 ; python_version >= '3.12'",
     "pytest-cov>=4.1.0,<5.0.0 ; python_version < '3.12'",
     "pytest-cov>=7.0.0 ; python_version >= '3.12'",
-    "ruff>=0.13.0",
+    "ruff>=0.14.4",
     "Sphinx>=8.0.2 ; python_version >= '3.12'",
     "sphinx-immaterial>=0.13.6 ; python_version >= '3.12'",
-    "tomli>=2.2.1",
+    "tomli>=2.3.0",
 ]
 
 [tool.hatch.build.targets.sdist]

@@ -4,13 +4,17 @@ on:
   release:
     types: [created]
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     if: github.event_name == 'release'
     steps:
     - name: Check out repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Get the tag name for the release
       id: vars
@@ -20,7 +24,7 @@ jobs:
         echo "tag=$tag" >> $GITHUB_OUTPUT
 
     - name: Install uv
-      uses: astral-sh/setup-uv@v5
+      uses: astral-sh/setup-uv@v7
       with:
         version: latest
         python-version: '3.13'
