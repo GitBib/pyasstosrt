@@ -176,7 +176,7 @@ class Subtitle:
     @staticmethod
     def merged_dialogues(
         dialogues: List[Tuple[str, str, str]],
-    ) -> Generator[tuple[str, str, str] | tuple[Any, str, str], Any, None]:
+    ) -> Generator[Union[Tuple[str, str, str], Tuple[Any, str, str]], Any, None]:
         """
         Group consecutive dialogues with the same text into a single dialogue with a merged time range.
 
