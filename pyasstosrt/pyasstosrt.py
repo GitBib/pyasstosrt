@@ -1,28 +1,28 @@
 import os
 import re
 from pathlib import Path
-from typing import List, Optional, Tuple, Union
+from typing import Any, Generator, List, Optional, Tuple, Union
 
 from .dialogue import Dialogue
 
 
 class Subtitle:
     """
-    Converting ASS (Advanced SubStation Alpha) subtitles to SRT format.
+    Converting ASS (Advanced SubStation Alpha) and SRT subtitles.
 
-    This class provides functionality to read an ASS subtitle file, convert its contents
+    This class provides functionality to read ASS or SRT subtitle files, convert their contents
     to SRT format, and export the result either as a file or as a list of dialogues.
 
-    :param filepath: Path to a file that contains text in Advanced SubStation Alpha format
+    :param filepath: Path to a file that contains text in ASS or SRT format
     :type filepath: Union[str, os.PathLike]
-    :param removing_effects: Whether to remove effects from the text
+    :param removing_effects: Whether to remove effects from the text (applies to ASS files)
     :type removing_effects: bool
     :param remove_duplicates: Whether to remove and merge consecutive duplicate dialogues
     :type remove_duplicates: bool
 
     :raises FileNotFoundError: If the specified file does not exist
 
-    :ivar filepath: The path to the input ASS file
+    :ivar filepath: The path to the input subtitle file
     :type filepath: Path
     :ivar file: The stem (filename without extension) of the input file
     :type file: str
@@ -45,6 +45,7 @@ class Subtitle:
 
     dialog_mask = re.compile(r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*?,\d+,\d+,\d+,.*?,(.*)")
     effects = re.compile(r"(\s?[ml].+?(-?\d+(\.\d+)?).+?(-?\d+(\.\d+)?).+)")
+    srt_pattern = re.compile(r"(\d{2}:\d{2}:\d{2},\d{3})\s*-->\s*(\d{2}:\d{2}:\d{2},\d{3})")
 
     def __init__(
         self,
@@ -70,11 +71,32 @@ class Subtitle:
         """
         return self.filepath.read_text(encoding="utf8")
 
+    def is_srt_format(self) -> bool:
+        """
+        Determines if the file is in SRT format.
+
+        :return: True if the file is in SRT format, False otherwise
+        :rtype: bool
+        """
+        return self.filepath.suffix.lower() == ".srt" or bool(self.srt_pattern.search(self.raw_text))
+
     def convert(self):
         """
-        Convert the ASS subtitles to SRT format.
+        Convert the subtitles to SRT format.
 
         This method processes the raw text, applies any necessary filters (like removing effects),
+        and prepares the dialogues for formatting. Automatically detects ASS or SRT format.
+        """
+        if self.is_srt_format():
+            self._convert_srt()
+        else:
+            self._convert_ass()
+
+    def _convert_ass(self):
+        """
+        Convert ASS subtitles to SRT format.
+
+        This method processes ASS format, applies any necessary filters (like removing effects),
         and prepares the dialogues for formatting.
         """
         cleaning_old_format = re.compile(r"{.*?}")
@@ -84,6 +106,58 @@ class Subtitle:
         dialogs = sorted(list(filter(lambda x: x[2], dialogs)))
 
         self.subtitle_formatting(dialogs)
+
+    def _convert_srt(self):
+        """
+        Parse SRT subtitles into internal tuple format.
+
+        Converts SRT format to the same (start, end, text) tuple format used by _convert_ass(),
+        then uses the shared subtitle_formatting() pipeline for creating Dialogue objects.
+
+        Note: SRT subtitle numbers are ignored - new sequential indices are generated
+        by subtitle_formatting() using enumerate(start=1).
+        """
+        # Parse all SRT entries using regex (similar to _convert_ass approach)
+        srt_entry_pattern = re.compile(
+            r"^\d+\s*$\s+"  # Subtitle number (ignored)
+            r"^(\d{2}:\d{2}:\d{2},\d{3})\s*-->\s*(\d{2}:\d{2}:\d{2},\d{3})\s*$\s+"  # Timecodes
+            r"((?:^(?!\d+\s*$).+$\s*)*)",  # Text (lines that are NOT just a number)
+            re.MULTILINE,
+        )
+
+        dialogs = []
+        for match in srt_entry_pattern.finditer(self.raw_text):
+            start_srt, end_srt, text = match.groups()
+
+            # Convert to ASS format for Time class: "00:00:10,580" → "0:00:10.58"
+            start_ass = self._srt_time_to_ass(start_srt)
+            end_ass = self._srt_time_to_ass(end_srt)
+
+            # Clean and join multiline text, filtering empty lines
+            text = " ".join(line.strip() for line in text.strip().split("\n") if line.strip())
+
+            if text:
+                dialogs.append((start_ass, end_ass, text))
+
+        # Sort by time, then use shared formatting pipeline
+        dialogs = sorted(dialogs)
+        self.subtitle_formatting(dialogs)
+
+    @staticmethod
+    def _srt_time_to_ass(srt_time: str) -> str:
+        """
+        Convert SRT time format to ASS time format.
+
+        :param srt_time: Time in SRT format (HH:MM:SS,mmm)
+        :type srt_time: str
+        :return: Time in ASS format (H:MM:SS.mm)
+        :rtype: str
+        """
+        # SRT: 00:00:10,580 -> ASS: 0:00:10.58
+        time_part, ms_part = srt_time.split(",")
+        h, m, s = time_part.split(":")
+        # Remove leading zero from hours and truncate milliseconds to 2 digits
+        return f"{int(h)}:{m}:{s}.{ms_part[:2]}"
 
     @staticmethod
     def text_clearing(raw_text: str) -> str:
@@ -102,7 +176,7 @@ class Subtitle:
     @staticmethod
     def merged_dialogues(
         dialogues: List[Tuple[str, str, str]],
-    ) -> List[Tuple[str, str, str]]:
+    ) -> Generator[Union[Tuple[str, str, str], Tuple[Any, str, str]], Any, None]:
         """
         Group consecutive dialogues with the same text into a single dialogue with a merged time range.
 
@@ -188,3 +262,4 @@ class Subtitle:
         with open(out_path, encoding=encoding, mode="w") as writer:
             for dialogue in self.dialogues:
                 writer.write(str(dialogue))
+            return None

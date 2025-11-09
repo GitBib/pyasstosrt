@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 from pyasstosrt import Subtitle
@@ -12,4 +11,4 @@ def test_removing_effects():
         file1 = open("tests/sub_standard-removing-effects.srt", "r", encoding="utf-8")
         assert file.read() == file1.read()
     file1.close()
-    os.remove("tests/sub-removing-effects.srt")
+    Path("tests/sub-removing-effects.srt").unlink()

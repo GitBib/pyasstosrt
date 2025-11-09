@@ -1,4 +1,3 @@
-import os
 import sys
 from pathlib import Path
 
@@ -7,13 +6,18 @@ from typer.testing import CliRunner
 
 from pyasstosrt import Subtitle
 
-myPath = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, f"{myPath}/../")
+myPath = Path(__file__).parent
+sys.path.insert(0, str(myPath.parent))
 
 
 @pytest.fixture
 def sub():
     return Subtitle("tests/sub.ass")
+
+
+@pytest.fixture
+def sub_srt():
+    return Subtitle("tests/test_sample.srt")
 
 
 @pytest.fixture

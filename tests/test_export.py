@@ -1,39 +1,41 @@
-import os
-from os.path import isfile
+from pathlib import Path
 
 
 def test_export_output_dialogues(sub):
     assert sub.export(output_dialogues=True)
-    assert not isfile("tests/sub.srt")
+    assert not Path("tests/sub.srt").is_file()
 
 
 def test_export_default(sub):
     try:
         sub.export()
-        assert isfile("tests/sub.srt")
+        assert Path("tests/sub.srt").is_file()
     finally:
-        if isfile("tests/sub.srt"):
-            os.remove("tests/sub.srt")
+        output_file = Path("tests/sub.srt")
+        if output_file.is_file():
+            output_file.unlink()
 
 
 def test_export_output_dir(sub):
     try:
         sub.export("tests/folder")
-        assert isfile("tests/folder/sub.srt")
+        assert Path("tests/folder/sub.srt").is_file()
     finally:
-        if isfile("tests/folder/sub.srt"):
-            os.remove("tests/folder/sub.srt")
+        output_file = Path("tests/folder/sub.srt")
+        if output_file.is_file():
+            output_file.unlink()
 
 
 def test_export_compatibility(sub):
     try:
         sub.export("tests/folder", "utf8", False)
-        assert isfile("tests/folder/sub.srt")
+        assert Path("tests/folder/sub.srt").is_file()
     finally:
-        if isfile("tests/folder/sub.srt"):
-            os.remove("tests/folder/sub.srt")
+        output_file = Path("tests/folder/sub.srt")
+        if output_file.is_file():
+            output_file.unlink()
 
 
 def test_export_output_dialogues_true(sub):
     assert sub.export(None, "utf8", True)
-    assert not isfile("tests/sub.srt")
+    assert not Path("tests/sub.srt").is_file()
