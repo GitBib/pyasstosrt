@@ -17,6 +17,18 @@ def test_open_use_pathlib():
     assert sub
 
 
+def test_open_srt():
+    path = "tests/test_sample.srt"
+    sub = Subtitle(path)
+    assert sub
+
+
+def test_open_srt_use_pathlib():
+    path = Path("tests/test_sample.srt")
+    sub = Subtitle(path)
+    assert sub
+
+
 @pytest.mark.parametrize(
     "file_path, expected_error",
     [

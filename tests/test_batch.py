@@ -189,3 +189,71 @@ def test_main_entry_point():
         with unittest.mock.patch("pyasstosrt.batch.app"):
             with open(sys.modules["pyasstosrt.batch"].__file__, encoding="utf-8") as f:
                 f.read()
+
+
+def test_export_srt_file_with_cli(cli_runner, test_dir, output_dir):
+    """Test converting SRT file through CLI."""
+
+    test_file = test_dir / "test_sample.srt"
+    assert test_file.exists(), f"Test file {test_file} not found"
+
+    try:
+        result = cli_runner.invoke(app, ["export", str(test_file), "--output-dir", str(output_dir)])
+        assert result.exit_code == 0
+        assert "Success: Converted test_sample.srt to" in result.stdout
+
+        expected_output = output_dir / "test_sample.srt"
+        assert expected_output.exists()
+
+        srt_content = expected_output.read_text(encoding="utf-8")
+        assert "1" in srt_content
+        assert "It's time for the main event!" in srt_content
+    finally:
+        expected_output = output_dir / "test_sample.srt"
+        if expected_output.exists():
+            expected_output.unlink()
+
+
+def test_export_srt_with_output_dir_cli(cli_runner, test_dir, output_dir):
+    """Test exporting SRT file to output directory through CLI."""
+
+    test_file = test_dir / "test_sample.srt"
+
+    result = cli_runner.invoke(app, ["export", str(test_file), "--output-dir", str(output_dir)])
+    assert result.exit_code == 0
+    expected_output = output_dir / "test_sample.srt"
+    assert expected_output.exists()
+
+    if expected_output.exists():
+        expected_output.unlink()
+
+
+def test_export_srt_with_remove_duplicates_cli(cli_runner, test_dir, output_dir):
+    """Test exporting SRT file with remove-duplicates flag through CLI."""
+
+    test_file = test_dir / "test_sample.srt"
+
+    try:
+        result = cli_runner.invoke(
+            app, ["export", str(test_file), "--remove-duplicates", "--output-dir", str(output_dir)]
+        )
+        assert result.exit_code == 0
+
+        expected_output = output_dir / "test_sample.srt"
+        assert expected_output.exists()
+    finally:
+        expected_output = output_dir / "test_sample.srt"
+        if expected_output.exists():
+            expected_output.unlink()
+
+
+def test_export_srt_with_output_dialogues_cli(cli_runner, test_dir):
+    """Test exporting SRT file with output-dialogues flag through CLI."""
+
+    test_file = test_dir / "test_sample.srt"
+
+    result = cli_runner.invoke(app, ["export", str(test_file), "--output-dialogues"])
+    assert result.exit_code == 0
+
+    assert f"Dialogues for {test_file.name}:" in result.stdout
+    assert "It's time for the main event!" in result.stdout

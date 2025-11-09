@@ -1,4 +1,4 @@
-import os
+from pathlib import Path
 
 
 def test_translate(sub):
@@ -7,4 +7,4 @@ def test_translate(sub):
         file1 = open("tests/sub_standard.srt", "r")
         assert file.read() == file1.read()
     file1.close()
-    os.remove("tests/sub.srt")
+    Path("tests/sub.srt").unlink()
