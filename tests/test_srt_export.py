@@ -1,4 +1,7 @@
+import tempfile
 from pathlib import Path
+
+from pyasstosrt import Subtitle
 
 
 def test_export_srt_output_dialogues(sub_srt):
@@ -55,10 +58,6 @@ def test_export_srt_output_dialogues_true(sub_srt):
 
 def test_export_srt_with_remove_duplicates():
     """Test SRT export with remove_duplicates option."""
-    import tempfile
-
-    from pyasstosrt import Subtitle
-
     # Create a temporary SRT file for testing
     temp_srt_content = """1
 00:00:01,000 --> 00:00:03,000

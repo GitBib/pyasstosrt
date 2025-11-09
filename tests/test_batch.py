@@ -1,6 +1,7 @@
 import sys
 import unittest.mock
 
+from pyasstosrt import Subtitle as OriginalSubtitle
 from pyasstosrt.batch import app
 
 
@@ -168,8 +169,6 @@ def test_simple_text_file_conversion(cli_runner, invalid_ass_file):
 
 def test_export_with_subtitle_exception(cli_runner, test_files, monkeypatch):
     test_file = test_files["sub"]
-
-    from pyasstosrt import Subtitle as OriginalSubtitle
 
     def mock_init(*args, **kwargs):
         raise ValueError("Test error")

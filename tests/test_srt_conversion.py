@@ -1,10 +1,12 @@
+import os
+import tempfile
+
 from pyasstosrt import Subtitle
+from pyasstosrt.pyasstosrt import Subtitle as SubtitleClass
 
 
 def test_srt_time_conversion():
     """Test SRT time format conversion to ASS format."""
-    from pyasstosrt.pyasstosrt import Subtitle as SubtitleClass
-
     # SRT: 00:00:10,580 -> ASS: 0:00:10.58
     assert SubtitleClass._srt_time_to_ass("00:00:10,580") == "0:00:10.58"
     assert SubtitleClass._srt_time_to_ass("00:01:23,456") == "0:01:23.45"
@@ -52,9 +54,6 @@ def test_srt_text_extraction(sub_srt):
 def test_srt_multiline_text():
     """Test parsing of multiline subtitles in SRT format."""
     # Create a simple SRT file with multiline text
-    import os
-    import tempfile
-
     srt_content = """1
 00:00:01,000 --> 00:00:03,000
 First line
