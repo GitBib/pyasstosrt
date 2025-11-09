@@ -594,8 +594,8 @@ dev = [
     { name = "pytest-cov", version = "4.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "pytest-cov", version = "7.0.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
     { name = "ruff" },
-    { name = "sphinx", marker = "python_full_version >= '3.12'" },
-    { name = "sphinx-immaterial", marker = "python_full_version >= '3.12'" },
+    { name = "sphinx", marker = "python_full_version >= '3.12' and python_full_version < '3.14'" },
+    { name = "sphinx-immaterial", marker = "python_full_version >= '3.12' and python_full_version < '3.14'" },
     { name = "tomli" },
 ]
 
@@ -610,8 +610,8 @@ dev = [
     { name = "pytest-cov", marker = "python_full_version < '3.12'", specifier = ">=4.1.0,<5.0.0" },
     { name = "pytest-cov", marker = "python_full_version >= '3.12'", specifier = ">=7.0.0" },
     { name = "ruff", specifier = ">=0.14.4" },
-    { name = "sphinx", marker = "python_full_version >= '3.12'", specifier = ">=8.0.2" },
-    { name = "sphinx-immaterial", marker = "python_full_version >= '3.12'", specifier = ">=0.13.6" },
+    { name = "sphinx", marker = "python_full_version >= '3.12' and python_full_version < '3.14'", specifier = ">=8.0.2" },
+    { name = "sphinx-immaterial", marker = "python_full_version >= '3.12' and python_full_version < '3.14'", specifier = ">=0.13.6" },
     { name = "tomli", specifier = ">=2.3.0" },
 ]
 
