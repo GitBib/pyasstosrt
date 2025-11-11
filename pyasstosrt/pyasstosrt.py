@@ -19,6 +19,12 @@ class Subtitle:
     :type removing_effects: bool
     :param remove_duplicates: Whether to remove and merge consecutive duplicate dialogues
     :type remove_duplicates: bool
+    :param only_default_style: If True, exports only styles with "Default" in the name (e.g., Default, Default_dvd)
+    :type only_default_style: bool
+    :param include_styles: List of styles to include (if specified, only these styles will be exported)
+    :type include_styles: Optional[List[str]]
+    :param exclude_styles: List of styles to exclude (if specified, these styles will be filtered out)
+    :type exclude_styles: Optional[List[str]]
 
     :raises FileNotFoundError: If the specified file does not exist
 
@@ -34,6 +40,12 @@ class Subtitle:
     :type removing_effects: bool
     :ivar is_remove_duplicates: Flag indicating whether to remove and merge consecutive duplicate dialogues
     :type is_remove_duplicates: bool
+    :ivar only_default_style: Flag indicating whether to export only styles with "Default" in name
+    :type only_default_style: bool
+    :ivar include_styles: List of styles to include (if specified, only these styles will be exported)
+    :type include_styles: Optional[List[str]]
+    :ivar exclude_styles: List of styles to exclude (if specified, these styles will be filtered out)
+    :type exclude_styles: Optional[List[str]]
 
     :Example:
 
@@ -43,7 +55,9 @@ class Subtitle:
     >>> sub.export("output/directory", encoding="utf-8")
     """
 
-    dialog_mask = re.compile(r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),.*?,\d+,\d+,\d+,.*?,(.*)")
+    dialog_mask = re.compile(
+        r"Dialogue: \d+?,(\d:\d{2}:\d{2}.\d{2}),(\d:\d{2}:\d{2}.\d{2}),(.*?),.*?,\d+,\d+,\d+,.*?,(.*)"
+    )
     effects = re.compile(r"(\s?[ml].+?(-?\d+(\.\d+)?).+?(-?\d+(\.\d+)?).+)")
     srt_pattern = re.compile(r"(\d{2}:\d{2}:\d{2},\d{3})\s*-->\s*(\d{2}:\d{2}:\d{2},\d{3})")
 
@@ -52,6 +66,9 @@ class Subtitle:
         filepath: Union[str, os.PathLike],
         removing_effects: bool = False,
         remove_duplicates: bool = False,
+        only_default_style: bool = False,
+        include_styles: Optional[List[str]] = None,
+        exclude_styles: Optional[List[str]] = None,
     ):
         self.filepath = Path(filepath)
         if not self.filepath.is_file():
@@ -59,8 +76,12 @@ class Subtitle:
         self.file: str = self.filepath.stem
         self.raw_text: str = self.get_text()
         self.dialogues: List[Dialogue] = []
+        self.styles: List[str] = []
         self.removing_effects: bool = removing_effects
         self.is_remove_duplicates: bool = remove_duplicates
+        self.only_default_style: bool = only_default_style
+        self.include_styles: Optional[List[str]] = include_styles
+        self.exclude_styles: Optional[List[str]] = exclude_styles
 
     def get_text(self) -> str:
         """
@@ -70,6 +91,21 @@ class Subtitle:
         :rtype: str
         """
         return self.filepath.read_text(encoding="utf8")
+
+    def get_styles(self) -> List[str]:
+        """
+        Return all unique style names from the ASS file.
+
+        Styles are collected during conversion. If convert() hasn't been called yet,
+        this method will call it automatically.
+
+        :return: List of unique style names found in the file
+        :rtype: List[str]
+        """
+        if not self.styles:
+            self.convert()
+
+        return self.styles
 
     def is_srt_format(self) -> bool:
         """
@@ -101,9 +137,32 @@ class Subtitle:
         """
         cleaning_old_format = re.compile(r"{.*?}")
         dialogs = re.findall(self.dialog_mask, re.sub(cleaning_old_format, "", self.raw_text))
+
+        # Collect unique styles
+        self.styles = sorted(set(d[2] for d in dialogs))
+
+        # Filter by styles if specified
+        if self.only_default_style and not self.include_styles and not self.exclude_styles:
+            # Keep only styles containing "Default" (e.g., Default, Default_dvd, etc.)
+            dialogs = list(filter(lambda d: "Default" in d[2], dialogs))
+        elif self.include_styles:
+            # Build inclusion set for efficient lookup
+            include_set = set(self.include_styles)
+            dialogs = list(filter(lambda d: d[2] in include_set, dialogs))
+        elif self.exclude_styles:
+            # Build exclusion set for efficient lookup
+            exclude_set = set(self.exclude_styles)
+            dialogs = list(filter(lambda d: d[2] not in exclude_set, dialogs))
+
         if self.removing_effects:
-            dialogs = filter(lambda x: re.sub(self.effects, "", x[2]), dialogs)
-        dialogs = sorted(list(filter(lambda x: x[2], dialogs)))
+            dialogs = filter(lambda x: re.sub(self.effects, "", x[3]), dialogs)
+        dialogs = list(filter(lambda x: x[3], dialogs))
+
+        # Convert from (start, end, style, text) to (start, end, text) for subtitle_formatting
+        dialogs = [(d[0], d[1], d[3]) for d in dialogs]
+
+        # Sort by (start, end, text) for chronological and stable order
+        dialogs = sorted(dialogs)
 
         self.subtitle_formatting(dialogs)
 

@@ -21,6 +21,11 @@ def sub_srt():
 
 
 @pytest.fixture
+def sub_with_styles():
+    return Subtitle("tests/sub_with_styles.ass")
+
+
+@pytest.fixture
 def cli_runner():
     return CliRunner()
 

@@ -14,7 +14,7 @@ def test_version(cli_runner):
 def test_export_help(cli_runner):
     result = cli_runner.invoke(app, ["export", "--help"])
     assert result.exit_code == 0
-    assert "Convert ASS subtitle file(s) to SRT format" in result.stdout
+    assert "Convert ASS/SSA subtitle file(s) to SRT format" in result.stdout
 
 
 def test_export_file_not_exists(cli_runner):
@@ -35,7 +35,7 @@ def test_export_with_existing_ass_file(cli_runner, test_files, cleanup_srt_files
 
     result = cli_runner.invoke(app, ["export", str(test_file)])
     assert result.exit_code == 0
-    assert "Success: Converted sub.ass to" in result.stdout
+    assert "✓ Success: sub.ass → sub.srt" in result.stdout
     assert srt_file.exists()
 
     srt_content = srt_file.read_text(encoding="utf-8")
@@ -146,8 +146,8 @@ def test_export_multiple_files(cli_runner, test_files, cleanup_srt_files):
 
     assert f"Processing: {file1.name}" in result.stdout
     assert f"Processing: {file2.name}" in result.stdout
-    assert f"Success: Converted {file1.name}" in result.stdout
-    assert f"Success: Converted {file2.name}" in result.stdout
+    assert f"✓ Success: {file1.name} →" in result.stdout
+    assert f"✓ Success: {file2.name} →" in result.stdout
 
     assert srt_file1.exists()
     assert srt_file2.exists()
@@ -158,7 +158,7 @@ def test_simple_text_file_conversion(cli_runner, invalid_ass_file):
 
     result = cli_runner.invoke(app, ["export", str(invalid_file)])
     assert result.exit_code == 0
-    assert f"Success: Converted {invalid_file.name}" in result.stdout
+    assert f"✓ Success: {invalid_file.name} →" in result.stdout
 
     srt_file = invalid_file.with_suffix(".srt")
     assert srt_file.exists()
@@ -177,8 +177,8 @@ def test_export_with_subtitle_exception(cli_runner, test_files, monkeypatch):
 
     result = cli_runner.invoke(app, ["export", str(test_file)])
 
-    assert result.exit_code == 0
-    assert "Error:" in result.stdout
+    assert result.exit_code == 1
+    assert "✗ Error:" in result.stdout
     assert f"Failed to convert {test_file.name}" in result.stdout
     assert "Test error" in result.stdout
 
@@ -199,7 +199,7 @@ def test_export_srt_file_with_cli(cli_runner, test_dir, output_dir):
     try:
         result = cli_runner.invoke(app, ["export", str(test_file), "--output-dir", str(output_dir)])
         assert result.exit_code == 0
-        assert "Success: Converted test_sample.srt to" in result.stdout
+        assert "✓ Success: test_sample.srt →" in result.stdout
 
         expected_output = output_dir / "test_sample.srt"
         assert expected_output.exists()
