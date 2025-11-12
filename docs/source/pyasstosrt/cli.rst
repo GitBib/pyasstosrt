@@ -18,16 +18,34 @@ The basic command syntax is:
 
 Where `FILEPATH...` is one or more paths to ASS subtitle files.
 
-Options
--------
+Commands
+--------
 
-The CLI supports the following options:
+``export``
+    Convert ASS/SSA subtitle file(s) to SRT format.
+
+``styles``
+    List all unique styles found in an ASS subtitle file.
+
+Export Options
+--------------
+
+The ``export`` command supports the following options:
 
 ``--remove-effects, -r``
     Remove effects from subtitles.
 
 ``--remove-duplicates, -d``
     Remove duplicate subtitles.
+
+``--only-default, -D``
+    Export only styles containing 'Default' in name (excludes Signs, Credits, etc.).
+
+``--include-styles, -i TEXT``
+    Comma-separated list of style names to include (e.g., 'Default,Signs').
+
+``--exclude-styles, -x TEXT``
+    Comma-separated list of style names to exclude (e.g., 'Signs,Credits_dvd').
 
 ``--output-dir, -o PATH``
     Output directory for the SRT file(s).
@@ -40,6 +58,18 @@ The CLI supports the following options:
 
 ``--version, -v``
     Show version and exit.
+
+.. note::
+   The style filtering options (``--only-default``, ``--include-styles``, ``--exclude-styles``)
+   are mutually exclusive. You can only use one at a time.
+
+Styles Command Options
+----------------------
+
+The ``styles`` command supports the following options:
+
+``--table, -t``
+    Display styles in a formatted table.
 
 Examples
 --------
@@ -126,3 +156,73 @@ You can combine multiple options:
 .. code-block:: bash
 
     pyasstosrt export subtitle.ass --remove-effects --remove-duplicates --output-dir ./output
+
+Style Filtering
+--------------
+
+List Available Styles
+~~~~~~~~~~~~~~~~~~~~
+
+Before filtering styles, you can list all available styles in a subtitle file:
+
+.. code-block:: bash
+
+    pyasstosrt styles subtitle.ass
+
+Display styles in a formatted table:
+
+.. code-block:: bash
+
+    pyasstosrt styles subtitle.ass --table
+
+Export Only Default Styles
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Export only dialogue styles (excludes signs, credits, etc.):
+
+.. code-block:: bash
+
+    pyasstosrt export subtitle.ass --only-default
+
+Include Specific Styles
+~~~~~~~~~~~~~~~~~~~~~~
+
+Export only specific styles by name:
+
+.. code-block:: bash
+
+    pyasstosrt export subtitle.ass --include-styles "Default,Alt"
+
+Include multiple styles:
+
+.. code-block:: bash
+
+    pyasstosrt export subtitle.ass --include-styles "Default,Thoughts,Narration"
+
+Exclude Specific Styles
+~~~~~~~~~~~~~~~~~~~~~~
+
+Export all styles except specific ones:
+
+.. code-block:: bash
+
+    pyasstosrt export subtitle.ass --exclude-styles "Signs,Credits"
+
+Exclude multiple styles:
+
+.. code-block:: bash
+
+    pyasstosrt export subtitle.ass --exclude-styles "Signs,Credits_dvd,Opening,Ending"
+
+Combine Style Filtering with Other Options
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can combine style filtering with other conversion options:
+
+.. code-block:: bash
+
+    pyasstosrt export subtitle.ass --only-default --remove-effects --remove-duplicates
+
+.. code-block:: bash
+
+    pyasstosrt export subtitle.ass --include-styles "Default,Alt" --output-dir ./output
