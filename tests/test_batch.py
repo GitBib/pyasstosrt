@@ -14,7 +14,7 @@ def test_version(cli_runner):
 def test_export_help(cli_runner):
     result = cli_runner.invoke(app, ["export", "--help"])
     assert result.exit_code == 0
-    assert "Convert ASS subtitle file(s) to SRT format" in result.stdout
+    assert "Convert ASS/SSA subtitle file(s) to SRT format" in result.stdout
 
 
 def test_export_file_not_exists(cli_runner):
@@ -35,7 +35,7 @@ def test_export_with_existing_ass_file(cli_runner, test_files, cleanup_srt_files
 
     result = cli_runner.invoke(app, ["export", str(test_file)])
     assert result.exit_code == 0
-    assert "Success: Converted sub.ass to" in result.stdout
+    assert "✓ Success: sub.ass → sub.srt" in result.stdout
     assert srt_file.exists()
 
     srt_content = srt_file.read_text(encoding="utf-8")
@@ -146,8 +146,8 @@ def test_export_multiple_files(cli_runner, test_files, cleanup_srt_files):
 
     assert f"Processing: {file1.name}" in result.stdout
     assert f"Processing: {file2.name}" in result.stdout
-    assert f"Success: Converted {file1.name}" in result.stdout
-    assert f"Success: Converted {file2.name}" in result.stdout
+    assert f"✓ Success: {file1.name} →" in result.stdout
+    assert f"✓ Success: {file2.name} →" in result.stdout
 
     assert srt_file1.exists()
     assert srt_file2.exists()
@@ -158,7 +158,7 @@ def test_simple_text_file_conversion(cli_runner, invalid_ass_file):
 
     result = cli_runner.invoke(app, ["export", str(invalid_file)])
     assert result.exit_code == 0
-    assert f"Success: Converted {invalid_file.name}" in result.stdout
+    assert f"✓ Success: {invalid_file.name} →" in result.stdout
 
     srt_file = invalid_file.with_suffix(".srt")
     assert srt_file.exists()
@@ -177,8 +177,8 @@ def test_export_with_subtitle_exception(cli_runner, test_files, monkeypatch):
 
     result = cli_runner.invoke(app, ["export", str(test_file)])
 
-    assert result.exit_code == 0
-    assert "Error:" in result.stdout
+    assert result.exit_code == 1
+    assert "✗ Error:" in result.stdout
     assert f"Failed to convert {test_file.name}" in result.stdout
     assert "Test error" in result.stdout
 
@@ -199,7 +199,7 @@ def test_export_srt_file_with_cli(cli_runner, test_dir, output_dir):
     try:
         result = cli_runner.invoke(app, ["export", str(test_file), "--output-dir", str(output_dir)])
         assert result.exit_code == 0
-        assert "Success: Converted test_sample.srt to" in result.stdout
+        assert "✓ Success: test_sample.srt →" in result.stdout
 
         expected_output = output_dir / "test_sample.srt"
         assert expected_output.exists()
@@ -256,3 +256,157 @@ def test_export_srt_with_output_dialogues_cli(cli_runner, test_dir):
 
     assert f"Dialogues for {test_file.name}:" in result.stdout
     assert "It's time for the main event!" in result.stdout
+
+
+def test_export_with_only_default_style(cli_runner, test_files, cleanup_srt_files):
+    """Test exporting with --only-default flag."""
+    test_file = test_files["sub"]
+    srt_file = test_file.with_suffix(".srt")
+
+    result = cli_runner.invoke(app, ["export", str(test_file), "--only-default"])
+    assert result.exit_code == 0
+    assert "Filter: Only 'Default' styles" in result.stdout
+    assert srt_file.exists()
+
+
+def test_export_with_include_styles(cli_runner, test_files, cleanup_srt_files):
+    """Test exporting with --include-styles flag."""
+    test_file = test_files["sub"]
+    srt_file = test_file.with_suffix(".srt")
+
+    result = cli_runner.invoke(app, ["export", str(test_file), "--include-styles", "Default,Signs"])
+    assert result.exit_code == 0
+    assert "Filter: Include styles: Default,Signs" in result.stdout
+    assert srt_file.exists()
+
+
+def test_export_with_exclude_styles(cli_runner, test_files, cleanup_srt_files):
+    """Test exporting with --exclude-styles flag."""
+    test_file = test_files["sub"]
+    srt_file = test_file.with_suffix(".srt")
+
+    result = cli_runner.invoke(app, ["export", str(test_file), "--exclude-styles", "Signs,Credits"])
+    assert result.exit_code == 0
+    assert "Filter: Exclude styles: Signs,Credits" in result.stdout
+    assert srt_file.exists()
+
+
+def test_export_with_mutually_exclusive_styles(cli_runner, test_files):
+    """Test that mutually exclusive style options are rejected."""
+    test_file = test_files["sub"]
+
+    # Test --only-default with --include-styles
+    result = cli_runner.invoke(app, ["export", str(test_file), "--only-default", "--include-styles", "Default"])
+    assert result.exit_code == 1
+    assert "mutually exclusive" in result.stdout
+
+    # Test --only-default with --exclude-styles
+    result = cli_runner.invoke(app, ["export", str(test_file), "--only-default", "--exclude-styles", "Signs"])
+    assert result.exit_code == 1
+    assert "mutually exclusive" in result.stdout
+
+    # Test --include-styles with --exclude-styles
+    result = cli_runner.invoke(
+        app, ["export", str(test_file), "--include-styles", "Default", "--exclude-styles", "Signs"]
+    )
+    assert result.exit_code == 1
+    assert "mutually exclusive" in result.stdout
+
+
+def test_export_with_permission_error(cli_runner, test_files, monkeypatch):
+    """Test handling of PermissionError during export."""
+    test_file = test_files["sub"]
+
+    def mock_init(*args, **kwargs):
+        raise PermissionError("Permission denied")
+
+    monkeypatch.setattr(OriginalSubtitle, "__init__", mock_init)
+
+    result = cli_runner.invoke(app, ["export", str(test_file)])
+    assert result.exit_code == 1
+    assert "✗ Error:" in result.stdout
+    assert "Permission denied" in result.stdout
+
+
+def test_export_with_file_not_found_error(cli_runner, test_files, monkeypatch):
+    """Test handling of FileNotFoundError during export."""
+    test_file = test_files["sub"]
+
+    def mock_init(*args, **kwargs):
+        raise FileNotFoundError("File disappeared")
+
+    monkeypatch.setattr(OriginalSubtitle, "__init__", mock_init)
+
+    result = cli_runner.invoke(app, ["export", str(test_file)])
+    assert result.exit_code == 1
+    assert "✗ Error:" in result.stdout
+    assert "File not found" in result.stdout
+
+
+def test_styles_command_simple_list(cli_runner, test_files):
+    """Test styles command with simple list output."""
+    test_file = test_files["sub_with_styles"]
+
+    result = cli_runner.invoke(app, ["styles", str(test_file)])
+    assert result.exit_code == 0
+    assert "Analyzing styles in:" in result.stdout
+    assert "Styles found in" in result.stdout
+    assert "Total:" in result.stdout
+    assert "Tips:" in result.stdout
+    # Check both Default and non-Default styles are shown
+    assert "Default" in result.stdout
+    assert "Signs" in result.stdout or "Alt" in result.stdout
+
+
+def test_styles_command_table_format(cli_runner, test_files):
+    """Test styles command with table format."""
+    test_file = test_files["sub"]
+
+    result = cli_runner.invoke(app, ["styles", str(test_file), "--table"])
+    assert result.exit_code == 0
+    assert "Analyzing styles in:" in result.stdout
+    assert "Styles in" in result.stdout
+
+
+def test_styles_command_file_not_found(cli_runner):
+    """Test styles command with non-existent file."""
+    result = cli_runner.invoke(app, ["styles", "nonexistent.ass"])
+    assert result.exit_code != 0
+
+
+def test_styles_command_with_error(cli_runner, test_files, monkeypatch):
+    """Test styles command error handling."""
+    test_file = test_files["sub"]
+
+    def mock_init(*args, **kwargs):
+        raise RuntimeError("Test error")
+
+    monkeypatch.setattr(OriginalSubtitle, "__init__", mock_init)
+
+    result = cli_runner.invoke(app, ["styles", str(test_file)])
+    assert result.exit_code == 1
+    assert "✗ Error:" in result.stdout
+
+
+def test_styles_command_with_file_not_found_error(cli_runner, test_files, monkeypatch):
+    """Test styles command FileNotFoundError handling."""
+    test_file = test_files["sub"]
+
+    def mock_init(*args, **kwargs):
+        raise FileNotFoundError("File disappeared")
+
+    monkeypatch.setattr(OriginalSubtitle, "__init__", mock_init)
+
+    result = cli_runner.invoke(app, ["styles", str(test_file)])
+    assert result.exit_code == 1
+    assert "✗ Error:" in result.stdout
+    assert "File not found" in result.stdout
+
+
+def test_styles_command_with_srt_file(cli_runner, test_dir):
+    """Test styles command with SRT file (no styles)."""
+    test_file = test_dir / "test_sample.srt"
+
+    result = cli_runner.invoke(app, ["styles", str(test_file)])
+    assert result.exit_code == 0
+    assert ("No styles found" in result.stdout) or ("file is in SRT format" in result.stdout)

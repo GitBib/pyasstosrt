@@ -21,6 +21,11 @@ def sub_srt():
 
 
 @pytest.fixture
+def sub_with_styles():
+    return Subtitle("tests/sub_with_styles.ass")
+
+
+@pytest.fixture
 def cli_runner():
     return CliRunner()
 
@@ -37,6 +42,7 @@ def test_files(test_dir):
         "sub_removing_effects": test_dir / "sub-removing-effects.ass",
         "sub_standard": test_dir / "sub_standard.srt",
         "sub_standard_removing_effects": test_dir / "sub_standard-removing-effects.srt",
+        "sub_with_styles": test_dir / "sub_with_styles.ass",
     }
 
 
