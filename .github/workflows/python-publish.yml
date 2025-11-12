@@ -5,7 +5,7 @@ on:
     types: [created]
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
 
 jobs:
@@ -33,10 +33,19 @@ jobs:
     - name: Install project
       run: uv sync --all-extras
 
-    - name: Build and publish
+    - name: Build package
+      shell: bash
+      run: uv build
+
+    - name: Upload built packages to release
       shell: bash
       run: |
-        uv build
-        uv publish
+        gh release upload "${{ steps.vars.outputs.tag }}" dist/* --clobber
+      env:
+        GH_TOKEN: ${{ github.token }}
+
+    - name: Publish to PyPI
+      shell: bash
+      run: uv publish
       env:
         UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }}
