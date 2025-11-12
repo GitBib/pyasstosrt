@@ -3,7 +3,7 @@ name = "pyasstosrt"
 version = "1.4.3"
 description = "Convert ASS subtitle to SRT format"
 authors = [{ name = "GitBib", email = "me@bnff.website" }]
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 readme = "README.md"
 license = { text = "Apache License, Version 2.0" }
 keywords = [
@@ -26,7 +26,6 @@ keywords = [
 classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -51,12 +50,12 @@ pyasstosrt = "pyasstosrt.batch:app"
 [dependency-groups]
 dev = [
     "pytest>=7.0.0,<8.0.0 ; python_version < '3.12'",
-    "pytest>=9.0.0 ; python_version >= '3.12'",
+    "pytest>=9.0.1 ; python_version >= '3.12'",
     "pytest-cov>=4.1.0,<5.0.0 ; python_version < '3.12'",
     "pytest-cov>=7.0.0 ; python_version >= '3.12'",
     "ruff>=0.14.4",
     "Sphinx>=8.0.2 ; python_version >= '3.12' and python_version < '3.14'",
-    "sphinx-immaterial>=0.13.6 ; python_version >= '3.12' and python_version < '3.14'",
+    "sphinx-immaterial>=0.13.8 ; python_version >= '3.12' and python_version < '3.14'",
     "tomli>=2.3.0",
 ]
 
@@ -133,7 +132,7 @@ all = true
 include = ["pyasstosrt", "tests"]
 
 [tool.ruff]
-target-version = "py38"
+target-version = "py313"
 line-length = 120
 
 [tool.ruff.lint]
