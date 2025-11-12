@@ -18,6 +18,7 @@ Subtitle
       ~Subtitle.convert
       ~Subtitle.export
       ~Subtitle.get_text
+      ~Subtitle.get_styles
       ~Subtitle.remove_duplicates
       ~Subtitle.subtitle_formatting
       ~Subtitle.text_clearing
@@ -35,6 +36,9 @@ Subtitle
       ~Subtitle.dialogues
       ~Subtitle.removing_effects
       ~Subtitle.is_remove_duplicates
+      ~Subtitle.only_default_style
+      ~Subtitle.include_styles
+      ~Subtitle.exclude_styles
 
    .. rubric:: Examples
 
@@ -98,3 +102,88 @@ Advanced Usage
     )
     sub.convert()
     sub.export('output/directory', encoding='utf-8')
+
+Style Filtering
+--------------
+
+List Available Styles
+~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    from pyasstosrt import Subtitle
+
+    # Get list of available styles
+    sub = Subtitle('subtitle.ass')
+    styles = sub.get_styles()
+    print(f"Available styles: {styles}")
+
+Export Only Default Styles
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    from pyasstosrt import Subtitle
+
+    # Export only dialogue styles (excludes signs, credits, etc.)
+    sub = Subtitle('subtitle.ass', only_default_style=True)
+    sub.export()
+
+Include Specific Styles
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    from pyasstosrt import Subtitle
+
+    # Export only specific styles
+    sub = Subtitle('subtitle.ass', include_styles=['Default', 'Alt'])
+    sub.export()
+
+    # Or as a single style
+    sub = Subtitle('subtitle.ass', include_styles=['Default'])
+    sub.export()
+
+Exclude Specific Styles
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    from pyasstosrt import Subtitle
+
+    # Export all styles except specific ones
+    sub = Subtitle('subtitle.ass', exclude_styles=['Signs', 'Credits'])
+    sub.export()
+
+    # Exclude multiple styles
+    sub = Subtitle('subtitle.ass', exclude_styles=['Signs', 'Credits_dvd', 'Opening', 'Ending'])
+    sub.export()
+
+Combine Style Filtering with Other Options
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    from pyasstosrt import Subtitle
+
+    # Combine style filtering with effects removal
+    sub = Subtitle(
+        'subtitle.ass',
+        only_default_style=True,
+        removing_effects=True,
+        remove_duplicates=True
+    )
+    sub.export('output')
+
+    # Include specific styles with custom options
+    sub = Subtitle(
+        'subtitle.ass',
+        include_styles=['Default', 'Thoughts'],
+        removing_effects=True
+    )
+    sub.export('output', encoding='utf-8')
+
+.. note::
+   The style filtering options (``only_default_style``, ``include_styles``, ``exclude_styles``)
+   are mutually exclusive. You can only use one at a time. If you try to use multiple,
+   a ``ValueError`` will be raised.

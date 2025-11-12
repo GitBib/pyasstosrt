@@ -12,8 +12,10 @@ Main Features
 -------------
 
 - Convert ASS/SSA subtitles to SRT format
+- **Style filtering**: Export only specific subtitle styles
 - Remove effects from subtitle text (optional)
 - Remove and merge consecutive duplicate dialogues (optional)
+- List available styles in ASS files
 - Support for both string paths and Path-like objects
 - Command-line interface (CLI) for easy usage
 
@@ -71,6 +73,19 @@ Here's a basic example of how to use pyasstosrt:
     sub = Subtitle('subtitle.ass')
     sub.export(output_dir='output', encoding='utf-8')
 
+    # Export only default dialogue styles
+    sub = Subtitle('subtitle.ass', only_default_style=True)
+    sub.export()
+
+    # Export specific styles
+    sub = Subtitle('subtitle.ass', include_styles=['Default', 'Alt'])
+    sub.export()
+
+    # List available styles
+    sub = Subtitle('subtitle.ass')
+    styles = sub.get_styles()
+    print(styles)  # ['Default', 'Signs', 'Credits', ...]
+
 Command Line Interface
 --------------------
 
@@ -98,6 +113,18 @@ The library provides a command-line interface for easy usage:
 
     # Print dialogues to console
     pyasstosrt export subtitle.ass --output-dialogues
+
+    # List available styles
+    pyasstosrt styles subtitle.ass
+
+    # Export only default dialogue styles
+    pyasstosrt export subtitle.ass --only-default
+
+    # Export specific styles
+    pyasstosrt export subtitle.ass --include-styles "Default,Alt"
+
+    # Exclude specific styles
+    pyasstosrt export subtitle.ass --exclude-styles "Signs,Credits"
 
     # Run without installation using uvx
     uvx --from 'pyasstosrt[cli]' pyasstosrt export * --remove-effects --remove-duplicates
