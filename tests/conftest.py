@@ -42,6 +42,7 @@ def test_files(test_dir):
         "sub_removing_effects": test_dir / "sub-removing-effects.ass",
         "sub_standard": test_dir / "sub_standard.srt",
         "sub_standard_removing_effects": test_dir / "sub_standard-removing-effects.srt",
+        "sub_with_styles": test_dir / "sub_with_styles.ass",
     }
 
 
