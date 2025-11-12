@@ -328,6 +328,21 @@ def test_export_with_permission_error(cli_runner, test_files, monkeypatch):
     assert "Permission denied" in result.stdout
 
 
+def test_export_with_file_not_found_error(cli_runner, test_files, monkeypatch):
+    """Test handling of FileNotFoundError during export."""
+    test_file = test_files["sub"]
+
+    def mock_init(*args, **kwargs):
+        raise FileNotFoundError("File disappeared")
+
+    monkeypatch.setattr(OriginalSubtitle, "__init__", mock_init)
+
+    result = cli_runner.invoke(app, ["export", str(test_file)])
+    assert result.exit_code == 1
+    assert "✗ Error:" in result.stdout
+    assert "File not found" in result.stdout
+
+
 def test_styles_command_simple_list(cli_runner, test_files):
     """Test styles command with simple list output."""
     test_file = test_files["sub_with_styles"]
@@ -371,6 +386,21 @@ def test_styles_command_with_error(cli_runner, test_files, monkeypatch):
     result = cli_runner.invoke(app, ["styles", str(test_file)])
     assert result.exit_code == 1
     assert "✗ Error:" in result.stdout
+
+
+def test_styles_command_with_file_not_found_error(cli_runner, test_files, monkeypatch):
+    """Test styles command FileNotFoundError handling."""
+    test_file = test_files["sub"]
+
+    def mock_init(*args, **kwargs):
+        raise FileNotFoundError("File disappeared")
+
+    monkeypatch.setattr(OriginalSubtitle, "__init__", mock_init)
+
+    result = cli_runner.invoke(app, ["styles", str(test_file)])
+    assert result.exit_code == 1
+    assert "✗ Error:" in result.stdout
+    assert "File not found" in result.stdout
 
 
 def test_styles_command_with_srt_file(cli_runner, test_dir):
